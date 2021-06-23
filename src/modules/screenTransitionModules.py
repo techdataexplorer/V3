@@ -9,7 +9,7 @@ import io
 import os
 import csv
 import math
-import sip
+#import sip
 import folium
 import urllib.request
 import requests

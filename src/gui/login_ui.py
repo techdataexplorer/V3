@@ -8,7 +8,7 @@ import json
 import io
 import os
 import csv
-import sip
+#import sip
 import folium
 import requests
 import pyrebase
