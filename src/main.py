@@ -9,7 +9,6 @@ import io
 import os
 import csv
 import math
-#import sip
 import folium
 import pyrebase
 import dataclasses
