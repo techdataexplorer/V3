@@ -1,13 +1,19 @@
-from distutils.core import setup
-import py2exe
+import sys
+from cx_Freeze import setup, Executable
 
-option = {
-    'bundle_files':1,
-    'compressed': True
-}
+# Dependencies are automatically detected, but it might need fine tuning.
+# "packages": ["os"] is used as example only
+# build_exe_options = {"packages": ["os"], "excludes": ["tkinter"]}
+
+# base="Win32GUI" should be used only for Windows GUI app
+base = None
+if sys.platform == "win64":
+    base = "Win64GUI"
 
 setup(
-    options = {'py2exe': option},
-    console=['main.py'],
-    zipfile = 'dist.zip',
+    name = "TDX-Desktop",
+    version = "1.0.1",
+    description = "My GUI application!",
+    # options = {"build_exe": build_exe_options},
+    executables = [Executable("main.py", base=base)]
 )
