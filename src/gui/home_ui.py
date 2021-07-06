@@ -8,7 +8,7 @@ import json
 import io
 import os
 import csv
-import sip
+# import sip
 import folium
 import requests
 from PyQt5.QtCore import *
@@ -105,7 +105,8 @@ class HomeWidget(QWidget):
     def accountUI(self, parent):
         # Profile picture
         self.profilePhoto = QLabel(self)
-        self.profilePhoto.setPixmap(QPixmap("./img/user.png")) # path starts from main.py
+        path = os.path.dirname(os.path.abspath(__file__))
+        self.profilePhoto.setPixmap(QPixmap(os.path.join(path, "../img/user.png"))) # path starts from main.py
         self.profilePhoto.setGeometry(68, 50, 64, 64)
         self.profilePhoto.setAlignment(Qt.AlignCenter)
 
@@ -154,7 +155,8 @@ class HomeWidget(QWidget):
         # Open new project button
         self.newProjectBtn = QPushButton(self)
         self.newProjectBtn.setText("Create new project")
-        self.newProjectBtn.setIcon(QIcon("./img/plus-icon.png"))
+        path = os.path.dirname(os.path.abspath(__file__))
+        self.newProjectBtn.setIcon(QIcon(os.path.join(path, "../img/plus-icon.png")))
         self.newProjectBtn.setIconSize(QSize(36,36))
         self.newProjectBtn.setStyleSheet("""
             QPushButton {
@@ -171,7 +173,8 @@ class HomeWidget(QWidget):
         # Open existing project button
         self.openProjectBtn = QPushButton(self)
         self.openProjectBtn.setText("Open existing project")
-        self.openProjectBtn.setIcon(QIcon("./img/folder-icon.png"))
+        path = os.path.dirname(os.path.abspath(__file__))
+        self.openProjectBtn.setIcon(QIcon(os.path.join(path, "../img/folder-icon.png")))
         self.openProjectBtn.setIconSize(QSize(36,36))
         self.openProjectBtn.setStyleSheet("""
             QPushButton {

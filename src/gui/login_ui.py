@@ -8,7 +8,7 @@ import json
 import io
 import os
 import csv
-import sip
+# import sip
 import folium
 import requests
 import pyrebase
@@ -54,7 +54,8 @@ class LogInWidget(QWidget):
 
         # Image
         self.logoLabel = QLabel(self)
-        self.logoLabel.setPixmap(QPixmap("./img/SD_logo.png")) # path starts from main.py
+        path = os.path.dirname(os.path.abspath(__file__))
+        self.logoLabel.setPixmap(QPixmap(os.path.join(path, "../img/SD_logo.png"))) # path starts from main.py
         self.logoLabel.setGeometry(0, 100, 400, 80)
         self.logoLabel.setAlignment(Qt.AlignCenter)
 
