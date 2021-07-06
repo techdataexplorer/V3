@@ -1,0 +1,6 @@
+### For macOS ###
+###### Requirements without Version Specifiers ######`
+pyrebase
+geopy
+PyQt5
+PyQtWebEngine

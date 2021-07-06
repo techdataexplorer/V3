@@ -15,9 +15,9 @@ import pyrebase
 import dataclasses
 from geopy.distance import geodesic
 from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtWebEngineWidgets import *
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QApplication, QMainWindow, QStackedWidget, QStackedLayout
+# from PyQt5.QtWebEngineWidgets import *
 
 # Gui
 from gui.login_ui import LogInWidget
@@ -96,7 +96,7 @@ def main():
     app = QApplication(sys.argv)
     window = MainWindow()
     path = os.path.dirname(os.path.abspath(__file__))
-    app.setWindowIcon(QIcon(os.path.join(path + "/img/sd-icon.png")))
+    app.setWindowIcon(QIcon(os.path.join(path, "/img/sd-icon.png")))
     window.show()
     sys.exit(app.exec_())
 
