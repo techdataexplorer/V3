@@ -156,6 +156,7 @@ class LogInWidget(QWidget):
                 border: 3px solid lightgray;
             }"""
         )
+        self.emailInput.setText("techsupport@spatialdatalyst.com")
         self.emailInput.setGeometry(650, 300, 300, 30)
 
         # password
@@ -179,6 +180,7 @@ class LogInWidget(QWidget):
                 border: 3px solid lightgray;
             }"""
         )
+        self.passwordInput.setText("s!99p@kk")
         self.passwordInput.setEchoMode(self.passwordInput.Password)
         self.passwordInput.setGeometry(650, 380, 300, 30)
 
@@ -269,9 +271,7 @@ class LogInWidget(QWidget):
         parent.pathDesignWidget1.usersEmailLabel.setText(parent.accountData.getEmail())
         parent.pathDesignWidget2.usersEmailLabel.setText(parent.accountData.getEmail())
         parent.pathDesignWidget3.usersEmailLabel.setText(parent.accountData.getEmail())
-        parent.popUp.upCommingFunctionality()
-        parent.central_widget.setCurrentIndex(2)
-        # parent.screenTransitionModules.moveToHomePage(parent)
+        parent.screenTransitionModules.moveToHomePage(parent)
 
 
     def resource_path(self, relative_path):
