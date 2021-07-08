@@ -9,7 +9,7 @@ import io
 import os
 import csv
 import sip
-import folium
+# import folium
 import dataclasses
 
 

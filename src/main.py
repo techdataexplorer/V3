@@ -10,14 +10,14 @@ import os
 import csv
 import math
 # import sip
-import folium
+# import folium
 import pyrebase
 import dataclasses
 from geopy.distance import geodesic
 from PyQt5.QtCore import *
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QStackedWidget, QStackedLayout
-# from PyQt5.QtWebEngineWidgets import *
+from PyQt5.QtWebEngineWidgets import *
 
 # Gui
 from gui.login_ui import LogInWidget
@@ -74,21 +74,21 @@ class MainWindow(QMainWindow):
 
         ### Set the UI at main ###
         self.central_widget = QStackedWidget(self)
-        # self.logInWidget = LogInWidget(self)
-        # self.signUpWidget = SignUpWidget(self)
-        # self.homeWidget = HomeWidget(self)
-        # self.pathDesignWidget0 = PathDesignWidget0(self)
-        # self.pathDesignWidget1 = PathDesignWidget1(self)
-        # self.pathDesignWidget2 = PathDesignWidget2(self)
-        # self.pathDesignWidget3 = PathDesignWidget3(self)
-        # # add widgets
-        # self.central_widget.addWidget(self.logInWidget)         # index 0
-        # self.central_widget.addWidget(self.signUpWidget)        # index 1
-        # self.central_widget.addWidget(self.homeWidget)          # index 2
-        # self.central_widget.addWidget(self.pathDesignWidget0)   # index 3
-        # self.central_widget.addWidget(self.pathDesignWidget1)   # index 4
-        # self.central_widget.addWidget(self.pathDesignWidget2)   # index 5
-        # self.central_widget.addWidget(self.pathDesignWidget3)   # index 6
+        self.logInWidget = LogInWidget(self)
+        self.signUpWidget = SignUpWidget(self)
+        self.homeWidget = HomeWidget(self)
+        self.pathDesignWidget0 = PathDesignWidget0(self)
+        self.pathDesignWidget1 = PathDesignWidget1(self)
+        self.pathDesignWidget2 = PathDesignWidget2(self)
+        self.pathDesignWidget3 = PathDesignWidget3(self)
+        # add widgets
+        self.central_widget.addWidget(self.logInWidget)         # index 0
+        self.central_widget.addWidget(self.signUpWidget)        # index 1
+        self.central_widget.addWidget(self.homeWidget)          # index 2
+        self.central_widget.addWidget(self.pathDesignWidget0)   # index 3
+        self.central_widget.addWidget(self.pathDesignWidget1)   # index 4
+        self.central_widget.addWidget(self.pathDesignWidget2)   # index 5
+        self.central_widget.addWidget(self.pathDesignWidget3)   # index 6
         self.setCentralWidget(self.central_widget)
 
 
@@ -96,7 +96,7 @@ def main():
     app = QApplication(sys.argv)
     window = MainWindow()
     path = os.path.dirname(os.path.abspath(__file__))
-    app.setWindowIcon(QIcon(os.path.join(path, "/img/sd-icon.png")))
+    # app.setWindowIcon(QIcon(os.path.join(path, "/img/sd-icon.png")))
     window.show()
     sys.exit(app.exec_())
 

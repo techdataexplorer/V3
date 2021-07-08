@@ -10,7 +10,7 @@ import os
 import csv
 import math
 # import sip
-import folium
+# import folium
 import urllib.request
 import requests
 from geopy.distance import geodesic

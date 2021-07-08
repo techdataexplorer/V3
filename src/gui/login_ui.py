@@ -9,7 +9,7 @@ import io
 import os
 import csv
 # import sip
-import folium
+# import folium
 import requests
 import pyrebase
 from PyQt5.QtCore import *
@@ -26,7 +26,7 @@ from constants.firebaseData import FirebaseData
 from constants.pathDesignData import PathDesignData
 
 # Modules
-# from modules.sideMenuModules import SideMenuModules
+from modules.screenTransitionModules import ScreenTransitionModules
 
 
 
@@ -55,7 +55,9 @@ class LogInWidget(QWidget):
         # Image
         self.logoLabel = QLabel(self)
         path = os.path.dirname(os.path.abspath(__file__))
-        self.logoLabel.setPixmap(QPixmap(os.path.join(path, "../img/SD_logo.png"))) # path starts from main.py
+        file = self.resource_path("SD_logo.png")
+        self.logoLabel.setPixmap(QPixmap(file))
+        # self.logoLabel.setPixmap(QPixmap(os.path.join(path, "../img/SD_logo.png"))) # path starts from main.py
         self.logoLabel.setGeometry(0, 100, 400, 80)
         self.logoLabel.setAlignment(Qt.AlignCenter)
 
@@ -220,7 +222,8 @@ class LogInWidget(QWidget):
             }"""
         )
         self.btn2.setGeometry(550, 680, 170, 50)
-        self.btn2.clicked.connect(lambda: parent.popUp.upCommingFunctionality())
+        # self.btn2.clicked.connect(lambda: parent.popUp.upCommingFunctionality())
+        self.btn2.clicked.connect(lambda: parent.screenTransitionModules.moveToSignUpPage(parent))
 
 
     def checkLogIn(self, parent):
@@ -241,10 +244,13 @@ class LogInWidget(QWidget):
                 except Exception as e:
                     try:
                         print("Login Error: ", e)
+                        parent.popUp.customMsg("Login error:")
                     except Exception as e:
                         print("Login error. Try again..")
+                        parent.popUp.customMsg("Login error. Try again...")
             else:
                 print("Input field needs valid input")
+                parent.popUp.customMsg("Invalid field needs valid input")
 
         except Exception as e:
             print("Error: invalid input")
@@ -263,4 +269,12 @@ class LogInWidget(QWidget):
         parent.pathDesignWidget1.usersEmailLabel.setText(parent.accountData.getEmail())
         parent.pathDesignWidget2.usersEmailLabel.setText(parent.accountData.getEmail())
         parent.pathDesignWidget3.usersEmailLabel.setText(parent.accountData.getEmail())
-        parent.screenTransitionModules.moveToHomePage(parent)
+        parent.popUp.upCommingFunctionality()
+        parent.central_widget.setCurrentIndex(2)
+        # parent.screenTransitionModules.moveToHomePage(parent)
+
+
+    def resource_path(self, relative_path):
+        if hasattr(sys, '_MEIPASS'):
+            return os.path.join(sys._MEIPASS, relative_path)
+        return os.path.join(os.path.abspath("."), relative_path)

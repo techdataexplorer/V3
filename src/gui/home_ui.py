@@ -9,7 +9,7 @@ import io
 import os
 import csv
 # import sip
-import folium
+# import folium
 import requests
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -106,7 +106,8 @@ class HomeWidget(QWidget):
         # Profile picture
         self.profilePhoto = QLabel(self)
         path = os.path.dirname(os.path.abspath(__file__))
-        self.profilePhoto.setPixmap(QPixmap(os.path.join(path, "../img/user.png"))) # path starts from main.py
+        file = self.resource_path("user.png")
+        self.profilePhoto.setPixmap(QPixmap(file)) # path starts from main.py
         self.profilePhoto.setGeometry(68, 50, 64, 64)
         self.profilePhoto.setAlignment(Qt.AlignCenter)
 
@@ -203,3 +204,8 @@ class HomeWidget(QWidget):
 
     def moveToPathDesignPage0(self, parent):
         parent.central_widget.setCurrentIndex(3)
+
+    def resource_path(self, relative_path):
+        if hasattr(sys, '_MEIPASS'):
+            return os.path.join(sys._MEIPASS, relative_path)
+        return os.path.join(os.path.abspath("."), relative_path)

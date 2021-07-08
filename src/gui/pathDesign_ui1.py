@@ -9,7 +9,7 @@ import io
 import os
 import csv
 # import sip
-import folium
+# import folium
 import requests
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -108,8 +108,8 @@ class PathDesignWidget1(QWidget):
     def accountUI(self):
         # Profile picture
         self.profilePhoto = QLabel(self)
-        path = os.path.dirname(os.path.abspath(__file__))
-        self.profilePhoto.setPixmap(QPixmap(os.path.join("./img/user.png"))) # path starts from main.py
+        file = self.resource_path("user.png")
+        self.profilePhoto.setPixmap(QPixmap(file)) # path starts from main.py
         self.profilePhoto.setGeometry(68, 50, 64, 64)
         self.profilePhoto.setAlignment(Qt.AlignCenter)
 
@@ -257,36 +257,48 @@ class PathDesignWidget1(QWidget):
 
 
         # split view
-        self.splitView = QSplitter(self)
-        self.splitView.setOrientation(Qt.Horizontal)
+        # self.splitView = QSplitter(self)
+        # self.splitView.setOrientation(Qt.Horizontal)
 
         # Table view
-        self.tablewidget = QTableWidget(10, 10)
+        self.tablewidget = QTableWidget(self)
+        self.tablewidget.setRowCount(10)
+        self.tablewidget.setColumnCount(10)
         # self.colHeaders = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
         self.colHeaders = ["Site Name", "Latitude", "Longitude", "Tower Height", "Antenna Height"]
         self.tablewidget.setHorizontalHeaderLabels(self.colHeaders)
         self.tablewidget.setSelectionBehavior(QTableWidget.SelectRows)
         self.tablewidget.setSelectionMode(QAbstractItemView.MultiSelection)
-
+        self.directionMsgLabel.setStyleSheet("""
+            QTableWidget {
+                background-color: red;
+                border: 3px solid blue;
+            }"""
+        )
+        self.tablewidget.setGeometry(220, 120, 960, 600)
 
 
         # map view
-        self.mapView = QWebEngineView(self)
-        self.mapView.settings().setAttribute(QWebEngineSettings.JavascriptEnabled, True)
-        path = os.path.dirname(os.path.abspath(__file__))
-        self.mapView.load(QUrl.fromLocalFile(QDir.current().absoluteFilePath(os.path.join('mapView.html'))))
-        self.mapView.setStyleSheet("""
-            QWebEngineView {
-            background-color: red;
-                border: 3px solid black;
-            }"""
-        )
+        # self.mapView = QWebEngineView(self)
+        # self.mapView.settings().setAttribute(QWebEngineSettings.JavascriptEnabled, True)
+        # path = os.path.dirname(os.path.abspath(__file__))
+        # file = self.resource_path("mapView.html")
+        # self.profilePhoto.setPixmap(QPixmap(file)) # path starts from main.py
+        # self.mapView.load(QUrl.fromLocalFile(QDir.current().absoluteFilePath(os.path.join('mapView.html'))))
+        # self.mapView.load(file)
+        # self.mapView.setStyleSheet("""
+        #     QWebEngineView {
+        #     background-color: red;
+        #         border: 3px solid black;
+        #     }"""
+        # )
 
         # set the views on split view wrapper
-        self.splitView.addWidget(self.tablewidget)
-        self.splitView.addWidget(self.mapView)
-        self.splitView.setSizes([480,480])
-        self.splitView.setGeometry(220, 120, 960, 600)
+        # self.splitView.addWidget(self.tablewidget)
+        # self.splitView.addWidget(self.mapView)
+        # self.splitView.setSizes([480,480])
+        # self.splitView.setGeometry(220, 120, 960, 600)
+
 
         # select specific sites button
         self.importSitesBtn = QPushButton(self)
@@ -343,6 +355,11 @@ class PathDesignWidget1(QWidget):
 
     def moveToPathDesignPage1(self, parent):
         parent.central_widget.setCurrentIndex(3)
+
+    def resource_path(self, relative_path):
+        if hasattr(sys, '_MEIPASS'):
+            return os.path.join(sys._MEIPASS, relative_path)
+        return os.path.join(os.path.abspath("."), relative_path)
 
     def moveToPathDesignPage2(self, parent):
         print("Go to path calculation page btn triggered!!")

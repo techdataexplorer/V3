@@ -9,8 +9,8 @@ import io
 import os
 import csv
 # import sip
-import folium
-import urllib.request
+# import folium
+# import urllib.request
 import requests
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -113,7 +113,10 @@ class PathDesignWidget3(QWidget):
     def accountUI(self, parent):
         # Profile picture
         self.profilePhoto = QLabel(self)
-        self.profilePhoto.setPixmap(QPixmap("./img/user.png")) # path starts from main.py
+        path = os.path.dirname(os.path.abspath(__file__))
+        file = self.resource_path("user.png")
+        self.profilePhoto.setPixmap(QPixmap(file)) # path starts from main.py
+        # self.profilePhoto.setPixmap(QPixmap("./img/user.png")) # path starts from main.py
         self.profilePhoto.setGeometry(68, 50, 64, 64)
         self.profilePhoto.setAlignment(Qt.AlignCenter)
 
@@ -1026,3 +1029,8 @@ class PathDesignWidget3(QWidget):
         print("Network config btn clicked")
         test = PathProfileModules()
         test.pathProfileAPI(parent)
+
+    def resource_path(self, relative_path):
+        if hasattr(sys, '_MEIPASS'):
+            return os.path.join(sys._MEIPASS, relative_path)
+        return os.path.join(os.path.abspath("."), relative_path)

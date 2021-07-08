@@ -10,7 +10,7 @@ import os
 import csv
 import math
 # import sip
-import folium
+# import folium
 import urllib.request
 import requests
 from geopy.distance import geodesic
@@ -28,7 +28,7 @@ class ScreenTransitionModules:
         parent.central_widget.setCurrentIndex(0)
 
     # Move to signup page.
-    def moveToLoginPage(self, parent):
+    def moveToSignUpPage(self, parent):
         parent.central_widget.setCurrentIndex(1)
 
     # Move to home page.

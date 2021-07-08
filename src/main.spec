@@ -16,6 +16,18 @@ a = Analysis(['main.py'],
              win_private_assemblies=False,
              cipher=block_cipher,
              noarchive=False)
+
+
+ a.datas += [('SD_logo.png', './img/SD_logo.png', 'DATA'),
+             ('sd-icon.png', './img/sd-icon.png', 'DATA'),
+             ('plus-icon.png', './img/plus-icon.png', 'DATA'),
+             ('placeholder.png', './img/placeholder.png', 'DATA'),
+             ('folder-icon.png', './img/folder-icon.png', 'DATA'),
+             ('user.png', './img/user.png', 'DATA'),
+             ('mapView.html', './mapView.html', 'DATA')
+            ]
+
+
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,
