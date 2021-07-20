@@ -9,8 +9,6 @@ import io
 import os
 import csv
 import math
-# import sip
-# import folium
 import pyrebase
 import dataclasses
 from geopy.distance import geodesic
@@ -51,7 +49,7 @@ class MainWindow(QMainWindow):
         # Firebase data
         self.firebaseData = FirebaseData()
         # Path design data
-        self.pathDesignData = PathDesignData(None, None, None, None, None, None, None, None, None, None, None, None)
+        self.pathDesignData = PathDesignData(None, None, None, None, None, None, None, None, None, None)
         # Screen Transition modules
         self.screenTransitionModules = ScreenTransitionModules()
         # Path profile calculation modules

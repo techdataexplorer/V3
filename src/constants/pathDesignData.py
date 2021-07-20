@@ -8,8 +8,6 @@ import json
 import io
 import os
 import csv
-import sip
-# import folium
 import pyrebase
 import dataclasses
 
@@ -19,26 +17,26 @@ import dataclasses
 
 @dataclasses.dataclass
 class PathDesignData:
-    selectedFilePath: str
-    fileType: str
-    site1Name: str              # Site 1
+    # Site 1
+    site1Name: str
     site1Latitude: float
     site1Longitude: float
     site1TowerHeight: float
     site1AntennaHeight: float
-    site2Name: str              # Site 2
+    # Site 2
+    site2Name: str
     site2Latitude: float
     site2Longitude: float
     site2TowerHeight: float
     site2AntennaHeight: float
 
     def __post_init__(self):
-        self.site1Name = "Site 1"        # Site 1
+        self.site1Name = "Site 1"           # Site 1
         self.site1Latitude = 0
         self.site1Longitude = 0
         self.site1TowerHeight = 0
         self.site1AntennaHeight = 0
-        self.site2Name = "Site 2"              # Site 2
+        self.site2Name = "Site 2"           # Site 2
         self.site2Latitude = 0
         self.site2Longitude = 0
         self.site2TowerHeight = 0
@@ -47,8 +45,6 @@ class PathDesignData:
 
     def printPathDesignData(self):
         print("---------------- Path design data ------------------")
-        print("Selected File Path   : ", str(self.selectedFilePath))
-        print("File Type            : ", str(self.fileType))
         print("--------------------- Site 1 -----------------------")
         print("Site 1 name          : ", str(self.site1Name))
         print("Site 1 lat           : ", str(self.site1Latitude))
@@ -56,8 +52,6 @@ class PathDesignData:
         print("Site 1 tower height  : ", str(self.site1TowerHeight))
         print("Site 1 antenna height: ", str(self.site1AntennaHeight))
         print("--------------------- Site 2 -----------------------")
-        print("Selected File Path   : ", str(self.selectedFilePath))
-        print("File Type            : ", str(self.fileType))
         print("Site 2 name          : ", str(self.site2Name))
         print("Site 2 lat           : ", str(self.site2Latitude))
         print("Site 2 lng           : ", str(self.site2Longitude))
@@ -136,7 +130,7 @@ class PathDesignData:
             print("Update value....")
             self.site2Name = str(data)
         else:
-            self.site1Latitude = "Site 2"
+            self.site2Name = "Site 2"
 
     def setSite2Lat(self, data):
         print("CHECK DATA >>> ", data)
@@ -168,7 +162,7 @@ class PathDesignData:
             self.site1Latitude = float(0)
 
     def getSite2Name(self):
-        return str(self.site1Name)
+        return str(self.site2Name)
 
     def getSite2Lat(self):
         return float(self.site2Latitude)

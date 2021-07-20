@@ -8,8 +8,7 @@ import json
 import io
 import os
 import csv
-# import sip
-# import folium
+import random
 import requests
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -21,6 +20,7 @@ from PyQt5.QtWebEngineWidgets import *
 from constants.accountData import AccountData
 from constants.firebaseData import FirebaseData
 from constants.pathDesignData import PathDesignData
+from constants.antennaFile import antennaData
 
 # Modules
 from modules.pathProfileModules import PathProfileModules
@@ -394,6 +394,7 @@ class PathDesignWidget2(QWidget):
         self.siteALatTextBox.setFixedWidth(170)
         self.siteALatTextBox.setFixedHeight(30)
         self.siteALatTextBox.setRange(-90, 90)
+        self.siteALatTextBox.setDecimals(4)
         # Add to H stack
         self.siteALatHLayout.addWidget(self.siteALatLabel)
         self.siteALatHLayout.addWidget(self.siteALatTextBox)
@@ -429,6 +430,7 @@ class PathDesignWidget2(QWidget):
         self.siteALngTextBox.setFixedWidth(170)
         self.siteALngTextBox.setFixedHeight(30)
         self.siteALngTextBox.setRange(-180, 180)
+        self.siteALngTextBox.setDecimals(4)
         # Add to H stack
         self.siteALngHLayout.addWidget(self.siteALngLabel)
         self.siteALngHLayout.addWidget(self.siteALngTextBox)
@@ -542,6 +544,8 @@ class PathDesignWidget2(QWidget):
 
     # Site A Antenna Type
     def siteAAntennaTypeUI(self):
+        # Antenna data
+        # antennaDataList = random.choice(antennaData)
         # Horizontal stack
         self.siteAAntennaTypeHLayout = QHBoxLayout() # remove 'self' due to err msg
         # site B antenna gain label
@@ -558,7 +562,8 @@ class PathDesignWidget2(QWidget):
         self.siteAAntennaTypeLabel.setContentsMargins(10, 15, 10, 10) # margin
         # drop down
         self.siteAAntennaTypeList = QComboBox(self)
-        self.siteAAntennaTypeList.addItems(["-Select Antenna Type-", "NOKIA", "FPA5250D06-N", "HPX2F-52", "PAR10-59"])
+        # self.siteAAntennaTypeList.addItems(["-Select Antenna Type-", "NOKIA", "FPA5250D06-N", "HPX2F-52", "PAR10-59"])
+        self.siteAAntennaTypeList.addItems(antennaData)
         self.siteAAntennaTypeList.setStyleSheet("""
             QComboBox {
                 color: black;
@@ -1189,6 +1194,7 @@ class PathDesignWidget2(QWidget):
         self.siteBLatTextBox.setFixedWidth(170)
         self.siteBLatTextBox.setFixedHeight(30)
         self.siteBLatTextBox.setRange(-90, 90)
+        self.siteBLatTextBox.setDecimals(4)
         # Add to H stack
         self.siteBLatHLayout.addWidget(self.siteBLatLabel)
         self.siteBLatHLayout.addWidget(self.siteBLatTextBox)
@@ -1223,6 +1229,7 @@ class PathDesignWidget2(QWidget):
         self.siteBLngTextBox.setFixedWidth(170)
         self.siteBLngTextBox.setFixedHeight(30)
         self.siteBLngTextBox.setRange(-180, 180)
+        self.siteBLngTextBox.setDecimals(4)
         # Add to H stack
         self.siteBLngHLayout.addWidget(self.siteBLngLabel)
         self.siteBLngHLayout.addWidget(self.siteBLngTextBox)
@@ -1349,7 +1356,7 @@ class PathDesignWidget2(QWidget):
         self.siteBAntennaTypeLabel.setContentsMargins(10, 15, 10, 10) # margin
         # drop down
         self.siteBAntennaTypeList = QComboBox(self)
-        self.siteBAntennaTypeList.addItems(["-Select Antenna Type-", "NOKIA", "FPA5250D06-N", "HPX2F-52", "PAR10-59"])
+        self.siteBAntennaTypeList.addItems(antennaData)
         self.siteBAntennaTypeList.setStyleSheet("""
             QComboBox {
                 color: black;

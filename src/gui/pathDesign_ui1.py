@@ -8,8 +8,6 @@ import json
 import io
 import os
 import csv
-# import sip
-# import folium
 import requests
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -380,7 +378,7 @@ class PathDesignWidget1(QWidget):
             parent.pathDesignData.setSite2TH(self.selectedRows[8].data())
             parent.pathDesignData.setSite2AH(self.selectedRows[9].data())
             # Print the data
-            # parent.pathDesignData.printPathDesignData()
+            parent.pathDesignData.printPathDesignData()
             # Update site A labels
             parent.pathDesignWidget2.siteALabel.setText(parent.pathDesignData.getSite1Name())
             parent.pathDesignWidget2.siteALatTextBox.setValue(parent.pathDesignData.getSite1Lat())
