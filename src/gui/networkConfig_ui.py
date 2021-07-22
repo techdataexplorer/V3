@@ -22,17 +22,20 @@ from constants.accountData import AccountData
 from constants.firebaseData import FirebaseData
 from constants.pathDesignData import PathDesignData
 
+# Modules
+# from modules.KML3DA import
+
 # "Network Config Page"
-class PathDesignWidget0(QWidget):
+class NetworkConfigWidget(QWidget):
 
     def __init__(self, parent=None):
-        super(PathDesignWidget0, self).__init__(parent)
+        super(NetworkConfigWidget, self).__init__(parent)
         self.initUI(parent)
 
     def initUI(self, parent):
         self.sideMenuUI(parent)
         self.accountUI()
-        self.rightMsgUI()
+        self.rightMsgUI(parent)
         self.subMenuUI(parent)
 
     # Sub menu UI when "Network Config" is clicked
@@ -210,28 +213,170 @@ class PathDesignWidget0(QWidget):
         self.profileSettingsBtn.clicked.connect(lambda: parent.popUp.upCommingFunctionality())
 
 
-    def rightMsgUI(self):
-        self.messageLabel = QLabel(self)
-        self.messageLabel.setText('Click on the menu "Network Configuration" and select the project type.')
-        self.messageLabel.setStyleSheet("""
-            QLabel {
-                color : darkgray;
-                font-size: 35px;
+    def rightMsgUI(self, parent):
+        # show option cards
+        self.pathDesignBtn(parent)
+        self.networkDesignBtn(parent)
+        self.kmlGeneratorBtn(parent)
+
+
+    # Path desgin button
+    def pathDesignBtn(self, parent):
+        # wrapper
+        self.pathDesignBtnWrapper = QWidget(self)
+        self.pathDesignBtnWrapper.setStyleSheet("""
+            QWidget {
+                color: blue;
+                font-size: 30px;
+                border: 3px solid white;
+                border-radius: 5%;
+                background-color: white;
             }"""
         )
-        self.messageLabel.setGeometry(300, 400, 800, 100)
-        self.messageLabel.setAlignment(Qt.AlignCenter)
-        self.messageLabel.setWordWrap(True)
+        self.pathDesignBtnWrapper.setGeometry(250, 50, 400, 250)
+        # Button label
+        self.pathDesignBtnLabel = QLabel(self)
+        self.pathDesignBtnLabel.setText('Path Desgin')
+        self.pathDesignBtnLabel.setStyleSheet("""
+            QLabel {
+                color : black;
+                font-size: 30px;
+            }"""
+        )
+        self.pathDesignBtnLabel.setGeometry(250, 70, 400, 60)
+        self.pathDesignBtnLabel.setAlignment(Qt.AlignCenter)
+        # discription
+        self.pathDesignBtnDescriptionLabel = QLabel(self)
+        self.pathDesignBtnDescriptionLabel.setText('Generate a point to point path profile. Visualize & analyze by importing your own site data.')
+        self.pathDesignBtnDescriptionLabel.setStyleSheet("""
+            QLabel {
+                color : black;
+                font-size: 15px;
+            }"""
+        )
+        self.pathDesignBtnDescriptionLabel.setGeometry(260, 120, 380, 60)
+        self.pathDesignBtnDescriptionLabel.setWordWrap(True)
+        self.pathDesignBtnDescriptionLabel.setAlignment(Qt.AlignCenter)
+        # "Try" button
+        self.pathDesignTryBtn = QPushButton(self)
+        self.pathDesignTryBtn.setText("Open")
+        self.pathDesignTryBtn.setStyleSheet("""
+            QPushButton {
+                color: black;
+                font-size: 20px;
+                background-color: orange;
+                border: 0px solid orange;
+                border-radius: 5%;
+            }"""
+        )
+        self.pathDesignTryBtn.setGeometry(400, 220, 100, 40)
+        self.pathDesignTryBtn.clicked.connect(lambda: parent.screenTransitionModules.moveToPathDesignPage1(parent))
 
 
+    # Network desgin button
+    def networkDesignBtn(self, parent):
+        # wrapper
+        self.networkDesignBtnWrapper = QWidget(self)
+        self.networkDesignBtnWrapper.setStyleSheet("""
+            QWidget {
+                color: blue;
+                font-size: 30px;
+                border: 3px solid white;
+                border-radius: 5%;
+                background-color: white;
+            }"""
+        )
+        self.networkDesignBtnWrapper.setGeometry(700, 50, 400, 250)
+        # Button label
+        self.networkDesignBtnLabel = QLabel(self)
+        self.networkDesignBtnLabel.setText('Network Desgin')
+        self.networkDesignBtnLabel.setStyleSheet("""
+            QLabel {
+                color : black;
+                font-size: 30px;
+            }"""
+        )
+        self.networkDesignBtnLabel.setGeometry(700, 70, 400, 60)
+        self.networkDesignBtnLabel.setAlignment(Qt.AlignCenter)
+        # discription
+        self.networkDesignBtnDescriptionLabel = QLabel(self)
+        self.networkDesignBtnDescriptionLabel.setText('Design your own network. Visualize & analyze by selecting specific sites.')
+        self.networkDesignBtnDescriptionLabel.setStyleSheet("""
+            QLabel {
+                color : black;
+                font-size: 15px;
+            }"""
+        )
+        self.networkDesignBtnDescriptionLabel.setGeometry(710, 120, 380, 60)
+        self.networkDesignBtnDescriptionLabel.setWordWrap(True)
+        self.networkDesignBtnDescriptionLabel.setAlignment(Qt.AlignCenter)
+        # "Try" button
+        self.networkDesignTryBtn = QPushButton(self)
+        self.networkDesignTryBtn.setText("Open")
+        self.networkDesignTryBtn.setStyleSheet("""
+            QPushButton {
+                color: black;
+                font-size: 20px;
+                background-color: orange;
+                border: 0px solid orange;
+                border-radius: 5%;
+            }"""
+        )
+        self.networkDesignTryBtn.setGeometry(850, 220, 100, 40)
+        self.networkDesignTryBtn.clicked.connect(lambda: parent.screenTransitionModules.moveToPathDesignPage1(parent))
 
-    def button01Clicked(self):
-        print("clicked!")
 
-
-
-    # def moveToPathDesignPage1(self, parent):
-    #     parent.central_widget.setCurrentIndex(4)
+    # KML Generator button
+    def kmlGeneratorBtn(self, parent):
+        # wrapper
+        self.kmlGeneratorBtnWrapper = QWidget(self)
+        self.kmlGeneratorBtnWrapper.setStyleSheet("""
+            QWidget {
+                color: blue;
+                font-size: 30px;
+                border: 3px solid white;
+                border-radius: 5%;
+                background-color: white;
+            }"""
+        )
+        self.kmlGeneratorBtnWrapper.setGeometry(250, 350, 400, 250)
+        # Button label
+        self.kmlGeneratorBtnLabel = QLabel(self)
+        self.kmlGeneratorBtnLabel.setText('KML Generator')
+        self.kmlGeneratorBtnLabel.setStyleSheet("""
+            QLabel {
+                color : black;
+                font-size: 30px;
+            }"""
+        )
+        self.kmlGeneratorBtnLabel.setGeometry(250, 370, 400, 60)
+        self.kmlGeneratorBtnLabel.setAlignment(Qt.AlignCenter)
+        # discription
+        self.kmlGeneratorBtnDescriptionLabel = QLabel(self)
+        self.kmlGeneratorBtnDescriptionLabel.setText('Generate a KML file. You can upload to Google Earth to visualize the network.')
+        self.kmlGeneratorBtnDescriptionLabel.setStyleSheet("""
+            QLabel {
+                color : black;
+                font-size: 15px;
+            }"""
+        )
+        self.kmlGeneratorBtnDescriptionLabel.setGeometry(260, 420, 380, 60)
+        self.kmlGeneratorBtnDescriptionLabel.setWordWrap(True)
+        self.kmlGeneratorBtnDescriptionLabel.setAlignment(Qt.AlignCenter)
+        # "Try" button
+        self.kmlGeneratorTryBtn = QPushButton(self)
+        self.kmlGeneratorTryBtn.setText("Open")
+        self.kmlGeneratorTryBtn.setStyleSheet("""
+            QPushButton {
+                color: black;
+                font-size: 20px;
+                background-color: orange;
+                border: 0px solid orange;
+                border-radius: 5%;
+            }"""
+        )
+        self.kmlGeneratorTryBtn.setGeometry(400, 520, 100, 40)
+        self.kmlGeneratorTryBtn.clicked.connect(lambda: parent.screenTransitionModules.moveToPathDesignPage1(parent))
 
 
     # Open sub menu

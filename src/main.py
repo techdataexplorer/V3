@@ -11,6 +11,7 @@ import csv
 import math
 import pyrebase
 import dataclasses
+import pandas as pd
 from geopy.distance import geodesic
 from PyQt5.QtCore import *
 from PyQt5.QtGui import QIcon
@@ -21,7 +22,7 @@ from PyQt5.QtWebEngineWidgets import *
 from gui.login_ui import LogInWidget
 from gui.signup_ui import SignUpWidget
 from gui.home_ui import HomeWidget
-from gui.pathDesign_ui0 import PathDesignWidget0
+from gui.networkConfig_ui import NetworkConfigWidget
 from gui.pathDesign_ui1 import PathDesignWidget1
 from gui.pathDesign_ui2 import PathDesignWidget2
 from gui.pathDesign_ui3 import PathDesignWidget3
@@ -75,7 +76,7 @@ class MainWindow(QMainWindow):
         self.logInWidget = LogInWidget(self)
         self.signUpWidget = SignUpWidget(self)
         self.homeWidget = HomeWidget(self)
-        self.pathDesignWidget0 = PathDesignWidget0(self)
+        self.networkConfigWidget = NetworkConfigWidget(self)
         self.pathDesignWidget1 = PathDesignWidget1(self)
         self.pathDesignWidget2 = PathDesignWidget2(self)
         self.pathDesignWidget3 = PathDesignWidget3(self)
@@ -83,7 +84,7 @@ class MainWindow(QMainWindow):
         self.central_widget.addWidget(self.logInWidget)         # index 0
         self.central_widget.addWidget(self.signUpWidget)        # index 1
         self.central_widget.addWidget(self.homeWidget)          # index 2
-        self.central_widget.addWidget(self.pathDesignWidget0)   # index 3
+        self.central_widget.addWidget(self.networkConfigWidget) # index 3
         self.central_widget.addWidget(self.pathDesignWidget1)   # index 4
         self.central_widget.addWidget(self.pathDesignWidget2)   # index 5
         self.central_widget.addWidget(self.pathDesignWidget3)   # index 6

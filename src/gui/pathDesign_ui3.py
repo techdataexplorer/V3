@@ -451,7 +451,7 @@ class PathDesignWidget3(QWidget):
         self.azimuthHLayout = QHBoxLayout() # remove 'self' due to err msg
         # azimuth label
         self.azimuthLabel = QLabel(self)
-        self.azimuthLabel.setText("Azimuth:")
+        self.azimuthLabel.setText("Azimuth (degrees):")
         self.azimuthLabel.setStyleSheet("""
             QLabel {
                 color : black;
@@ -488,7 +488,7 @@ class PathDesignWidget3(QWidget):
         self.pathDistanceHLayout = QHBoxLayout() # remove 'self' due to err msg
         # pathDistance label
         self.pathDistanceLabel = QLabel(self)
-        self.pathDistanceLabel.setText("Path Distance:")
+        self.pathDistanceLabel.setText("Path Distance (Mi):")
         self.pathDistanceLabel.setStyleSheet("""
             QLabel {
                 color : black;

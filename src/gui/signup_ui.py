@@ -8,8 +8,6 @@ import json
 import io
 import os
 import csv
-# import sip
-# import folium
 import requests
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *

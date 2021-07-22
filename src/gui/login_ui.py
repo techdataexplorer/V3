@@ -267,7 +267,7 @@ class LogInWidget(QWidget):
     def moveToHomePage(self, parent):
         # Update the email on the side menu
         parent.homeWidget.usersEmailLabel.setText(parent.accountData.getEmail())
-        parent.pathDesignWidget0.usersEmailLabel.setText(parent.accountData.getEmail())
+        parent.networkConfigWidget.usersEmailLabel.setText(parent.accountData.getEmail())
         parent.pathDesignWidget1.usersEmailLabel.setText(parent.accountData.getEmail())
         parent.pathDesignWidget2.usersEmailLabel.setText(parent.accountData.getEmail())
         parent.pathDesignWidget3.usersEmailLabel.setText(parent.accountData.getEmail())

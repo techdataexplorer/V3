@@ -23,20 +23,21 @@ from PyQt5.QtWebEngineWidgets import *
 class PathProfileModules:
 
     # Effective Isotropic Radiated Power (dBm)
-    # [Input]
-    # (1)
-    # (2)
-    # (3)
-    # (4)
     def EIRP(self, antennaGain, transmitPower, TXCouplingLoss, MiscLoss):
         result = float(antennaGain + transmitPower - TXCouplingLoss - MiscLoss)
         print("EIRP: ", result)
         return result
 
 
-    #
-    def azimuth(self):
-        print("Azimuth: not implemented yet...")
+    # Azimuth between site A and site B
+    def azimuth(self, siteALat, siteALng, siteBLat, siteBLng):
+        lngDifference = (siteBLng) - (siteALng)
+        a = math.sin(math.radians(lngDifference)) * math.cos(math.radians(siteBLat))
+        b = math.cos(math.radians(siteALat)) * math.sin(math.radians(siteBLat))
+        c = math.sin(math.radians(siteALat)) * math.cos(math.radians(siteBLat)) * math.cos(math.radians(lngDifference))
+        result = math.degrees(math.atan2(a, (b-c))) % 360
+        print("Azimuth: ", result)
+        return result
 
 
     # Distance in Km
@@ -180,11 +181,10 @@ class PathProfileModules:
         parameters["nf"]    = -101
         parameters["mat"]   = 0
         parameters["file"]  = "kmz"
-
-
+        # Result
         response = requests.post("https://cloudrf.com/API/path", params=parameters)
-        self.jprint(response.json())
-
+        # self.jprint(response.json())
+        # Update the UI on next page
         url = str(response.json()["Chart image"])
         data = urllib.request.urlopen(url).read()
         image = QImage()
@@ -201,6 +201,7 @@ class PathProfileModules:
 
 # Test
 # test = PathProfileModules()
+# test.azimuth(51.50, 0, -22.97, -43.18)
 # test.EIRP(10, 5, 1, 1)
 # test.pathDistanceKm(52.2296756, 21.0122287, 52.406374, 16.9251681)
 # test.pathDistanceMiles(52.2296756, 21.0122287, 52.406374, 16.9251681)
