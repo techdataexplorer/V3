@@ -189,7 +189,7 @@ class KMLGeneratorWidget1(QWidget):
             }"""
         )
         self.mapBtn.setGeometry(450, 10, 200, 50)
-        self.mapBtn.clicked.connect(lambda: parent.screenTransitionModules.moveToPathDesignPage1(parent))
+        self.mapBtn.clicked.connect(lambda: parent.screenTransitionModules.moveToKMLGeneratorPage1(parent))
 
         # 2. Select site button
         self.selectSitesBtn = QPushButton(self)
@@ -335,6 +335,6 @@ class KMLGeneratorWidget1(QWidget):
 
     def moveToKMLGeneratorPage2(self, parent):
         #
-        
+
         # Change page
         parent.screenTransitionModules.moveToPathDesignPage2(parent)

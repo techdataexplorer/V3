@@ -189,7 +189,7 @@ class KMLGeneratorWidget2(QWidget):
 
         # 1. Import/select sites button
         self.mapBtn = QPushButton(self)
-        self.mapBtn.setText("1. Import/select sites")
+        self.mapBtn.setText("1. Import site data")
         self.mapBtn.setStyleSheet("""
             QPushButton {
                 color: black;
@@ -199,11 +199,11 @@ class KMLGeneratorWidget2(QWidget):
             }"""
         )
         self.mapBtn.setGeometry(450, 10, 200, 50)
-        self.mapBtn.clicked.connect(lambda: parent.screenTransitionModules.moveToPathDesignPage1(parent))
+        self.mapBtn.clicked.connect(lambda: parent.screenTransitionModules.moveToKMLGeneratorPage1(parent))
 
         # 2. Select site button
         self.selectSitesBtn = QPushButton(self)
-        self.selectSitesBtn.setText("2. Path calculation")
+        self.selectSitesBtn.setText("2. Configuration")
         self.selectSitesBtn.setStyleSheet("""
             QPushButton {
                 color: black;
@@ -213,11 +213,11 @@ class KMLGeneratorWidget2(QWidget):
             }"""
         )
         self.selectSitesBtn.setGeometry(700, 10, 200, 50)
-        self.selectSitesBtn.clicked.connect(lambda: parent.screenTransitionModules.moveToPathDesignPage2(parent))
+        self.selectSitesBtn.clicked.connect(lambda: parent.screenTransitionModules.moveToKMLGeneratorPage2(parent))
 
         # 3. Configure parameters
         self.selectSitesBtn = QPushButton(self)
-        self.selectSitesBtn.setText("3. Path profile")
+        self.selectSitesBtn.setText("3. KML profile")
         self.selectSitesBtn.setStyleSheet("""
             QPushButton {
                 color: lightgray;
