@@ -50,3 +50,11 @@ class ScreenTransitionModules:
     # Move to path design page 3.
     def moveToPathDesignPage3(self, parent):
         parent.central_widget.setCurrentIndex(6)
+
+    # Move to KML generator page 1.
+    def moveToKMLGeneratorPage1(self, parent):
+        parent.central_widget.setCurrentIndex(7)
+
+    # Move to KML generator page 2.
+    def moveToKMLGeneratorPage2(self, parent):
+        parent.central_widget.setCurrentIndex(8)

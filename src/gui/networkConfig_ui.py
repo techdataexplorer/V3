@@ -376,7 +376,7 @@ class NetworkConfigWidget(QWidget):
             }"""
         )
         self.kmlGeneratorTryBtn.setGeometry(400, 520, 100, 40)
-        self.kmlGeneratorTryBtn.clicked.connect(lambda: parent.screenTransitionModules.moveToPathDesignPage1(parent))
+        self.kmlGeneratorTryBtn.clicked.connect(lambda: parent.screenTransitionModules.moveToKMLGeneratorPage1(parent))
 
 
     # Open sub menu

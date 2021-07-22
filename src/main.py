@@ -26,6 +26,8 @@ from gui.networkConfig_ui import NetworkConfigWidget
 from gui.pathDesign_ui1 import PathDesignWidget1
 from gui.pathDesign_ui2 import PathDesignWidget2
 from gui.pathDesign_ui3 import PathDesignWidget3
+from gui.KMLGenerator_ui1 import KMLGeneratorWidget1
+from gui.KMLGenerator_ui2 import KMLGeneratorWidget2
 
 
 # Data Model
@@ -80,6 +82,8 @@ class MainWindow(QMainWindow):
         self.pathDesignWidget1 = PathDesignWidget1(self)
         self.pathDesignWidget2 = PathDesignWidget2(self)
         self.pathDesignWidget3 = PathDesignWidget3(self)
+        self.kmlGeneratorWidget1 = KMLGeneratorWidget1(self)
+        self.kmlGeneratorWidget2 = KMLGeneratorWidget2(self)
         # add widgets
         self.central_widget.addWidget(self.logInWidget)         # index 0
         self.central_widget.addWidget(self.signUpWidget)        # index 1
@@ -88,6 +92,8 @@ class MainWindow(QMainWindow):
         self.central_widget.addWidget(self.pathDesignWidget1)   # index 4
         self.central_widget.addWidget(self.pathDesignWidget2)   # index 5
         self.central_widget.addWidget(self.pathDesignWidget3)   # index 6
+        self.central_widget.addWidget(self.kmlGeneratorWidget1) # index 7
+        self.central_widget.addWidget(self.kmlGeneratorWidget2) # index 8
         self.setCentralWidget(self.central_widget)
 
 

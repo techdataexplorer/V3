@@ -244,7 +244,7 @@ PathsOnlyYN = input()
 if PathsOnlyYN == "y":
     PathsOnlyYN = "Y"
 
-PRIMARYFILE = ROOTFILE + "/" + PathsName +".CSV"
+PRIMARYFILE = ROOTFILE + "/" + PathsName +".csv"
 OUTPUTFILE = ROOTFILE + "/" + PathsName + ".KML" #KML file
 TEMPFILE = FolderPath + "/TempFile.csv"
 
