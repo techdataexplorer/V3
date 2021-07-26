@@ -12,7 +12,7 @@ import requests
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from PyQt5.QtWebEngineWidgets import *
+# from PyQt5.QtWebEngineWidgets import *
 
 
 # Data Model
@@ -159,7 +159,7 @@ class KMLGeneratorWidget1(QWidget):
         self.projectNameTag.setStyleSheet("""
             QPushButton {
                 color: black;
-                font-size: 17px;
+                font-size: 20px;
                 border-radius: 5%;
                 background-color: rgba(250, 128, 114, 1);
             }"""
@@ -285,7 +285,7 @@ class KMLGeneratorWidget1(QWidget):
             }"""
         )
         self.importSitesBtn.setGeometry(1030, 740, 150, 40)
-        # self.importSitesBtn.clicked.connect(lambda: self.moveToPathDesignPage2(parent)) # validate the rows
+        self.importSitesBtn.clicked.connect(lambda: self.moveToKMLGeneratorPage2(parent)) # validate the rows
 
 
 
@@ -335,6 +335,5 @@ class KMLGeneratorWidget1(QWidget):
 
     def moveToKMLGeneratorPage2(self, parent):
         #
-
         # Change page
-        parent.screenTransitionModules.moveToPathDesignPage2(parent)
+        parent.screenTransitionModules.moveToKMLGeneratorPage2(parent)

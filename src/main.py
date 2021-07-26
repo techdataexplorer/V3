@@ -16,7 +16,7 @@ from geopy.distance import geodesic
 from PyQt5.QtCore import *
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QStackedWidget, QStackedLayout
-from PyQt5.QtWebEngineWidgets import *
+# from PyQt5.QtWebEngineWidgets import *
 
 # Gui
 from gui.login_ui import LogInWidget

@@ -15,7 +15,7 @@ import pyrebase
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from PyQt5.QtWebEngineWidgets import *
+# from PyQt5.QtWebEngineWidgets import *
 
 # Gui
 from gui.signup_ui import SignUpWidget
@@ -239,7 +239,7 @@ class LogInWidget(QWidget):
                 print("Check log in called passwd   : ", self.passwdUserInput)
                 try:
                     self.user = parent.firebaseData.auth.sign_in_with_email_and_password(self.emailUserInput, self.passwdUserInput)
-                    print("check results >> ", self.user)
+                    # print("check results >> ", self.user)
                     parent.accountData.setEmail(self.emailUserInput)
                     parent.accountData.setPasswd(self.passwdUserInput)
                     self.moveToHomePage(parent)

@@ -13,7 +13,7 @@ import requests
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-from PyQt5.QtWebEngineWidgets import *
+# from PyQt5.QtWebEngineWidgets import *
 
 
 # Data Model
@@ -21,6 +21,7 @@ from constants.accountData import AccountData
 from constants.firebaseData import FirebaseData
 from constants.pathDesignData import PathDesignData
 from constants.antennaFile import antennaData
+from constants.radioFile import radioData
 
 # Modules
 from modules.pathProfileModules import PathProfileModules
@@ -888,7 +889,7 @@ class PathDesignWidget2(QWidget):
         self.siteARadioTypeLabel.setContentsMargins(10, 15, 10, 10) # margin
         # drop down
         self.siteARadioTypeList = QComboBox(self)
-        self.siteARadioTypeList.addItems(["-Select Radio Type-", "NOKIA HQAM\Apaptive\HC021QAWVCE18-Q-2048A50S-427", "MPT-HC-HQAM", "HPX2F-52", "PAR10-59"])
+        self.siteARadioTypeList.addItems(radioData)
         self.siteARadioTypeList.setStyleSheet("""
             QComboBox {
                 color: black;
@@ -1669,7 +1670,7 @@ class PathDesignWidget2(QWidget):
         self.siteBRadioTypeLabel.setContentsMargins(10, 15, 10, 10) # margin
         # drop down
         self.siteBRadioTypeList = QComboBox(self)
-        self.siteBRadioTypeList.addItems(["-Select Radio Type-", "NOKIA HQAM\Apaptive\HC021QAWVCE18-Q-2048A50S-427", "MPT-HC-HQAM", "HPX2F-52", "PAR10-59"])
+        self.siteBRadioTypeList.addItems(radioData)
         self.siteBRadioTypeList.setStyleSheet("""
             QComboBox {
                 color: black;
