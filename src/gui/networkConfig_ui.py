@@ -34,7 +34,7 @@ class NetworkConfigWidget(QWidget):
 
     def initUI(self, parent):
         self.sideMenuUI(parent)
-        self.accountUI()
+        self.accountUI(parent)
         self.rightMsgUI(parent)
         self.subMenuUI(parent)
 
@@ -165,7 +165,7 @@ class NetworkConfigWidget(QWidget):
 
 
     # account UI
-    def accountUI(self):
+    def accountUI(self, parent):
         # Profile picture
         self.profilePhoto = QLabel(self)
         file = self.resource_path("user.png")

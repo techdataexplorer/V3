@@ -16,7 +16,6 @@ from geopy.distance import geodesic
 from PyQt5.QtCore import *
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QStackedWidget, QStackedLayout
-# from PyQt5.QtWebEngineWidgets import *
 
 # Gui
 from gui.login_ui import LogInWidget
@@ -28,6 +27,7 @@ from gui.pathDesign_ui2 import PathDesignWidget2
 from gui.pathDesign_ui3 import PathDesignWidget3
 from gui.KMLGenerator_ui1 import KMLGeneratorWidget1
 from gui.KMLGenerator_ui2 import KMLGeneratorWidget2
+from gui.KMLGenerator_ui3 import KMLGeneratorWidget3
 
 
 # Data Model
@@ -39,6 +39,7 @@ from constants.pathDesignData import PathDesignData
 from modules.pathProfileModules import PathProfileModules
 from modules.screenTransitionModules import ScreenTransitionModules
 from modules.popUpModules import PopUpModules
+from modules.KML3DAModules import KML3DAModules
 
 
 # Script for credentials
@@ -59,6 +60,8 @@ class MainWindow(QMainWindow):
         self.pathCalc = PathProfileModules()
         # Pop up modules
         self.popUp = PopUpModules()
+        # KML Generator modules
+        self.kmlGenerator = KML3DAModules()
 
 
         ### window frame ###
@@ -84,6 +87,7 @@ class MainWindow(QMainWindow):
         self.pathDesignWidget3 = PathDesignWidget3(self)
         self.kmlGeneratorWidget1 = KMLGeneratorWidget1(self)
         self.kmlGeneratorWidget2 = KMLGeneratorWidget2(self)
+        self.kmlGeneratorWidget3 = KMLGeneratorWidget3(self)
         # add widgets
         self.central_widget.addWidget(self.logInWidget)         # index 0
         self.central_widget.addWidget(self.signUpWidget)        # index 1
@@ -94,6 +98,7 @@ class MainWindow(QMainWindow):
         self.central_widget.addWidget(self.pathDesignWidget3)   # index 6
         self.central_widget.addWidget(self.kmlGeneratorWidget1) # index 7
         self.central_widget.addWidget(self.kmlGeneratorWidget2) # index 8
+        self.central_widget.addWidget(self.kmlGeneratorWidget3) # index 9
         self.setCentralWidget(self.central_widget)
 
 

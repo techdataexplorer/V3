@@ -13,7 +13,6 @@ import requests
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-# from PyQt5.QtWebEngineWidgets import *
 
 
 # Data Model
@@ -24,6 +23,7 @@ from constants.antennaFile import antennaData
 
 # Modules
 from modules.pathProfileModules import PathProfileModules
+from modules.KML3DAModules import KML3DAModules
 
 
 # "2. Path Calculation Page"
@@ -313,6 +313,7 @@ class KMLGeneratorWidget2(QWidget):
         self.siteAScroll.setWidgetResizable(True)
         self.siteAScroll.setGeometry(230, 150, 900, 550)
         # define each UI field and append them to the vertical stack view
+        self.downloadLocationUI(parent)
         self.dotColorUI(parent)                       #
         self.pathColorUI(parent)                      #
         self.fileHeaderUI(parent)
@@ -322,7 +323,61 @@ class KMLGeneratorWidget2(QWidget):
         self.siteAContainer.setLayout(self.configVLayout)
 
 
-    # Site A latitude
+
+    # Each horizontal layout UI
+    # Define result file download location
+    def downloadLocationUI(self, parent):
+        # Horizontal stack
+        self.downloadLocationHLayout = QHBoxLayout() # remove 'self' due to err msg
+        # downloadLocation label
+        self.downloadLocationLabel = QLabel(self)
+        self.downloadLocationLabel.setText("Select the location you want do download:")
+        self.downloadLocationLabel.setStyleSheet("""
+            QLabel {
+                color : black;
+                font-size: 17px;
+            }"""
+        )
+        self.downloadLocationLabel.setAlignment(Qt.AlignLeft)
+        self.downloadLocationLabel.setFixedWidth(500)
+        self.downloadLocationLabel.setContentsMargins(10, 15, 10, 10) # margin
+        # downloadLocation result (read only)
+        self.downloadLocationTextBox = QLineEdit(self)
+        self.downloadLocationTextBox.setStyleSheet("""
+            QLineEdit {
+                font-size: 15px;
+                border-radius: 5%;
+                border: 3px solid lightgray;
+                background-color: white;
+            }"""
+        )
+        self.downloadLocationTextBox.setText("-- Path not defined --")
+        self.downloadLocationTextBox.setAlignment(Qt.AlignLeft)
+        self.downloadLocationTextBox.setFixedWidth(320)
+        self.downloadLocationTextBox.setReadOnly(True)
+        # Open finder and select location for download
+        self.downloadLocationBtn = QPushButton(self)
+        self.downloadLocationBtn.setText("...")
+        self.downloadLocationBtn.setStyleSheet("""
+            QPushButton {
+                color: black;
+                font-size: 15px;
+                background-color:lightgray;
+                border: 3px solid blue;
+                border-radius: 5%;
+            }"""
+        )
+        self.downloadLocationBtn.setFixedWidth(30)
+        self.downloadLocationBtn.setFixedHeight(30)
+        self.downloadLocationBtn.clicked.connect(lambda: self.setDownloadLocation(parent))
+        # Add to H stack
+        self.downloadLocationHLayout.addWidget(self.downloadLocationLabel)
+        self.downloadLocationHLayout.addWidget(self.downloadLocationTextBox)
+        self.downloadLocationHLayout.addWidget(self.downloadLocationBtn)
+        # Add to V stack
+        self.configVLayout.addLayout(self.downloadLocationHLayout)
+
+
     def dotColorUI(self, parent):
         # Horizontal stack
         self.dotColorHLayout = QHBoxLayout() # remove 'self' due to err msg
@@ -341,7 +396,7 @@ class KMLGeneratorWidget2(QWidget):
         # site A latitude text input
         # drop down
         self.dotColorOptionList = QComboBox(self)
-        self.dotColorOptionList.addItems(["-- Select --", "Black", "Red", "Green", "Blue", "Yellow", "Brown", "Orange", "Light Green"])
+        self.dotColorOptionList.addItems(["Red", "Black", "Green", "Blue", "Yellow", "Brown", "Orange", "LtGreen"])
         self.dotColorOptionList.setStyleSheet("""
             QComboBox {
                 color: black;
@@ -378,7 +433,7 @@ class KMLGeneratorWidget2(QWidget):
         # site A latitude text input
         # drop down
         self.pathColorOptionList = QComboBox(self)
-        self.pathColorOptionList.addItems(["-- Select --", "Black", "Red", "Green", "Blue", "Yellow", "Brown", "Orange", "Light Green"])
+        self.pathColorOptionList.addItems(["Black", "Red", "Green", "Blue", "Yellow", "Brown", "Orange", "LtGreen"])
         self.pathColorOptionList.setStyleSheet("""
             QComboBox {
                 color: black;
@@ -508,27 +563,37 @@ class KMLGeneratorWidget2(QWidget):
         self.configVLayout.addLayout(self.avoidSitesHLayout)
 
 
-
     def resource_path(self, relative_path):
         if hasattr(sys, '_MEIPASS'):
             return os.path.join(sys._MEIPASS, relative_path)
         return os.path.join(os.path.abspath("."), relative_path)
 
+    def setDownloadLocation(self, parent):
+        self.fileDialogWidget = QFileDialog(self)
+        path = str(self.fileDialogWidget.getExistingDirectory(self, "Select location to save the kml file"))
+        self.downloadLocationTextBox.setText(path)
+        parent.kmlGenerator.downloadPath = path
 
     def dotColorSelected(self, parent):
-        pass
+        parent.kmlGenerator.dotColor = str(self.dotColorOptionList.currentText())
 
     def pathColorSelected(self, parent):
-        pass
+        parent.kmlGenerator.pathColor = str(self.pathColorOptionList.currentText())
 
     def fileHeaderSelected(self, parent):
-        pass
+        parent.kmlGenerator.headerYN = str(self.fileHeaderOptionList.currentText())
 
     def showSiteNamesSelected(self, parent):
-        pass
+        parent.kmlGenerator.siteTitleYN = str(self.showSiteNamesOptionList.currentText())
 
     def avoidSitesSelected(self, parent):
-        pass
+        parent.kmlGenerator.pathsOnlyYN = str(self.avoidSitesOptionList.currentText())
 
     def nextBtnClicked(self, parent):
-        pass
+        downloadLocation    = parent.kmlGenerator.downloadPath
+        csvFilePath         = parent.kmlGenerator.csvFilePath
+        selectedDotColor    = parent.kmlGenerator.dotColor
+        selectedPathColor   = parent.kmlGenerator.pathColor
+        parent.kmlGenerator.generateKML(downloadLocation, csvFilePath, selectedDotColor, selectedPathColor)
+        parent.kmlGeneratorWidget3.savedLocationTextBox.setText(downloadLocation)
+        parent.screenTransitionModules.moveToKMLGeneratorPage3(parent)

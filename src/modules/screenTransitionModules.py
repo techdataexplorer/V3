@@ -58,3 +58,7 @@ class ScreenTransitionModules:
     # Move to KML generator page 2.
     def moveToKMLGeneratorPage2(self, parent):
         parent.central_widget.setCurrentIndex(8)
+
+    # Move to KML generator page 2.
+    def moveToKMLGeneratorPage3(self, parent):
+        parent.central_widget.setCurrentIndex(9)

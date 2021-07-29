@@ -32,7 +32,7 @@ class PathDesignWidget1(QWidget):
 
     def initUI(self, parent):
         self.sideMenuUI(parent)
-        self.accountUI()
+        self.accountUI(parent)
         self.progressUI(parent)
         self.mapTableViewUI(parent)
 
@@ -103,7 +103,7 @@ class PathDesignWidget1(QWidget):
 
 
     # account UI
-    def accountUI(self):
+    def accountUI(self, parent):
         # Profile picture
         self.profilePhoto = QLabel(self)
         file = self.resource_path("user.png")
