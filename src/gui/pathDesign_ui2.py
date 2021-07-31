@@ -2161,6 +2161,7 @@ class PathDesignWidget2(QWidget):
             parent.pathDesignWidget3.receivedSignalLevelTextBox.setText( str( round(self.receivedSignalLevelResult, 2) ))
             # (5) Flat Fade Margin
             self.flatFadeMarginResult = float(parent.pathCalc.flatFadeMargin(self.receivedSignalLevelResult, self.rxThresholdValue))
+            parent.pathDesignWidget3.flatFadeMarginTextBox.setText( str( round(self.flatFadeMarginResult, 2) ))
             # (6) Cloud RF API
             if (self.siteAAntennaHeight != 0) and (self.siteBAntennaHeight != 0):
                 parent.pathCalc.pathProfileAPI(parent, self.siteALat, self.siteALng, self.siteAAntennaHeight, 2.14, self.freq, self.siteBLat, self.siteBLng, self.siteBAntennaHeight, self.rxAntennaGain, 0, "v")
