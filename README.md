@@ -8,7 +8,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="src/img/SD_logo.png" alt="Logo" width="400" height="80">
+    <img src="src/img/sd-icon.png" alt="Logo" width="100" height="100">
   </a>
 
   <h3 align="center">TDX Desktop ("V3")</h3>
@@ -58,12 +58,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`pugNOrange`, `V3`, `twitter_handle`, `che.blankenship@utdallas.edu`, `TDX Desktop V3`, `Desktop application for RF Engineers`
 
 
 ### Built With
