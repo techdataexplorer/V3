@@ -47,7 +47,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#technical">Technical Document</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
@@ -59,12 +59,16 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+TDX Desktop ("V3") is a desktop application which helps network designers to create path profiles,
+coverage maps, KML files. The V3 UI helps users to complete each task seamlessly and return the
+optimized results.
+
 
 ### Built With
 
 * [Python 3](https://www.python.org)
 * [PyQt 5](https://pypi.org/project/PyQt5/)
-* [Numpy](https://numpy.org)
+* [Pandas](https://pandas.pydata.org)
 * [PyInstaller](http://www.pyinstaller.org)
 
 
@@ -150,12 +154,12 @@ This is an example of how to list things you need to use the software and how to
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For more examples, please refer to the [Documentation](https://www.spatialdatalyst.com)_
 
 
 
-<!-- ROADMAP -->
-## Roadmap
+<!-- TECHNICAL DOCUMENTATION -->
+## Technical
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
 
@@ -182,22 +186,3 @@ Project Link: [https://github.com/techdataexplorer/V3](https://github.com/techda
 * []()
 * []()
 * []()
-
-
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo.svg?style=for-the-badge
-[contributors-url]: https://github.com/github_username/repo/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo.svg?style=for-the-badge
-[forks-url]: https://github.com/github_username/repo/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo.svg?style=for-the-badge
-[stars-url]: https://github.com/github_username/repo/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/github_username
