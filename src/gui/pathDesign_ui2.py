@@ -467,6 +467,7 @@ class PathDesignWidget2(QWidget):
         self.siteATHTextBox.setFixedWidth(170)
         self.siteATHTextBox.setFixedHeight(30)
         self.siteATHTextBox.setRange(0, 2000)
+        self.siteATHTextBox.setValue(100)
         # Add to H stack
         self.siteATHHLayout.addWidget(self.siteATHLabel)
         self.siteATHHLayout.addWidget(self.siteATHTextBox)
@@ -502,6 +503,7 @@ class PathDesignWidget2(QWidget):
         self.siteAAntennaHeightTextBox.setFixedWidth(170)
         self.siteAAntennaHeightTextBox.setFixedHeight(30)
         self.siteAAntennaHeightTextBox.setRange(0, 2000)
+        self.siteAAntennaHeightTextBox.setValue(100)
         # Add to H stack
         self.siteAAntennaHeightHLayout.addWidget(self.siteAAntennaHeightLabel)
         self.siteAAntennaHeightHLayout.addWidget(self.siteAAntennaHeightTextBox)
@@ -537,6 +539,7 @@ class PathDesignWidget2(QWidget):
         self.siteAAntennaGainTextBox.setFixedWidth(170)
         self.siteAAntennaGainTextBox.setFixedHeight(30)
         self.siteAAntennaGainTextBox.setRange(0, 100)
+        self.siteAAntennaGainTextBox.setValue(39)
         # Add to H stack
         self.siteAAntennaGainHLayout.addWidget(self.siteAAntennaGainLabel)
         self.siteAAntennaGainHLayout.addWidget(self.siteAAntennaGainTextBox)
@@ -611,6 +614,7 @@ class PathDesignWidget2(QWidget):
         self.siteATransmitPowerTextBox.setFixedWidth(170)
         self.siteATransmitPowerTextBox.setFixedHeight(30)
         self.siteATransmitPowerTextBox.setRange(0, 100)
+        self.siteATransmitPowerTextBox.setValue(30)
         # Add to H stack
         self.siteATransmitPowerHLayout.addWidget(self.siteATransmitPowerLabel)
         self.siteATransmitPowerHLayout.addWidget(self.siteATransmitPowerTextBox)
@@ -790,6 +794,7 @@ class PathDesignWidget2(QWidget):
         self.siteARXThresholdTextBox.setFixedWidth(170)
         self.siteARXThresholdTextBox.setFixedHeight(30)
         self.siteARXThresholdTextBox.setRange(-100, 0)
+        self.siteARXThresholdTextBox.setValue(-70)
         # Add to H stack
         self.siteARXThresholdHLayout.addWidget(self.siteARXThresholdLabel)
         self.siteARXThresholdHLayout.addWidget(self.siteARXThresholdTextBox)
@@ -827,7 +832,7 @@ class PathDesignWidget2(QWidget):
         self.siteAFrequencyTextBox.setFixedWidth(170)
         self.siteAFrequencyTextBox.setFixedHeight(30)
         self.siteAFrequencyTextBox.setRange(100, 30000)
-        self.siteAFrequencyTextBox.setValue(100)
+        self.siteAFrequencyTextBox.setValue(11625)
         # Add to H stack
         self.siteAFrequencyHLayout.addWidget(self.siteAFrequencyLabel)
         self.siteAFrequencyHLayout.addWidget(self.siteAFrequencyTextBox)
@@ -936,6 +941,7 @@ class PathDesignWidget2(QWidget):
         self.siteAModulationTextBox.setFixedWidth(170)
         self.siteAModulationTextBox.setFixedHeight(30)
         self.siteAModulationTextBox.setRange(2, 4096)
+        self.siteAModulationTextBox.setValue(256)
         # Add to H stack
         self.siteAModulationHLayout.addWidget(self.siteAModulationLabel)
         self.siteAModulationHLayout.addWidget(self.siteAModulationTextBox)
@@ -972,6 +978,7 @@ class PathDesignWidget2(QWidget):
         self.siteABandwidthTextBox.setFixedWidth(170)
         self.siteABandwidthTextBox.setFixedHeight(30)
         self.siteABandwidthTextBox.setRange(1, 100)
+        self.siteABandwidthTextBox.setValue(30)
         # Add to H stack
         self.siteABandwidthHLayout.addWidget(self.siteABandwidthLabel)
         self.siteABandwidthHLayout.addWidget(self.siteABandwidthTextBox)
@@ -1008,6 +1015,7 @@ class PathDesignWidget2(QWidget):
         self.siteADataRateTextBox.setFixedWidth(170)
         self.siteADataRateTextBox.setFixedHeight(30)
         self.siteADataRateTextBox.setRange(1, 4000)
+        self.siteADataRateTextBox.setValue(150)
         # Add to H stack
         self.siteADataRateHLayout.addWidget(self.siteADataRateLabel)
         self.siteADataRateHLayout.addWidget(self.siteADataRateTextBox)
@@ -1265,6 +1273,7 @@ class PathDesignWidget2(QWidget):
         self.siteBTHTextBox.setFixedWidth(170)
         self.siteBTHTextBox.setFixedHeight(30)
         self.siteBTHTextBox.setRange(0, 2000)
+        self.siteBTHTextBox.setValue(100)
         # Add to H stack
         self.siteBTHHLayout.addWidget(self.siteBTHLabel)
         self.siteBTHHLayout.addWidget(self.siteBTHTextBox)
@@ -1299,6 +1308,7 @@ class PathDesignWidget2(QWidget):
         self.siteBAntennaHeightTextBox.setFixedWidth(170)
         self.siteBAntennaHeightTextBox.setFixedHeight(30)
         self.siteBAntennaHeightTextBox.setRange(0, 2000)
+        self.siteBAntennaHeightTextBox.setValue(100)
         # Add to H stack
         self.siteBAntennaHeightHLayout.addWidget(self.siteBAntennaHeightLabel)
         self.siteBAntennaHeightHLayout.addWidget(self.siteBAntennaHeightTextBox)
@@ -1333,6 +1343,7 @@ class PathDesignWidget2(QWidget):
         self.siteBAntennaGainTextBox.setFixedWidth(170)
         self.siteBAntennaGainTextBox.setFixedHeight(30)
         self.siteBAntennaGainTextBox.setRange(0, 100)
+        self.siteBAntennaGainTextBox.setValue(39)
         # Add to H stack
         self.siteBAntennaGainHLayout.addWidget(self.siteBAntennaGainLabel)
         self.siteBAntennaGainHLayout.addWidget(self.siteBAntennaGainTextBox)
@@ -1403,6 +1414,7 @@ class PathDesignWidget2(QWidget):
         self.siteBTransmitPowerTextBox.setFixedWidth(170)
         self.siteBTransmitPowerTextBox.setFixedHeight(30)
         self.siteBTransmitPowerTextBox.setRange(0, 100)
+        self.siteBTransmitPowerTextBox.setValue(30)
         # Add to H stack
         self.siteBTransmitPowerHLayout.addWidget(self.siteBTransmitPowerLabel)
         self.siteBTransmitPowerHLayout.addWidget(self.siteBTransmitPowerTextBox)
@@ -1576,6 +1588,7 @@ class PathDesignWidget2(QWidget):
         self.siteBRXThresholdTextBox.setFixedWidth(170)
         self.siteBRXThresholdTextBox.setFixedHeight(30)
         self.siteBRXThresholdTextBox.setRange(-100, 0)
+        self.siteBRXThresholdTextBox.setValue(-70)
         # Add to H stack
         self.siteBRXThresholdHLayout.addWidget(self.siteBRXThresholdLabel)
         self.siteBRXThresholdHLayout.addWidget(self.siteBRXThresholdTextBox)
@@ -1611,6 +1624,7 @@ class PathDesignWidget2(QWidget):
         self.siteBFrequencyTextBox.setFixedWidth(170)
         self.siteBFrequencyTextBox.setFixedHeight(30)
         self.siteBFrequencyTextBox.setRange(100, 30000)
+        self.siteBFrequencyTextBox.setValue(11625)
         # Add to H stack
         self.siteBFrequencyHLayout.addWidget(self.siteBFrequencyLabel)
         self.siteBFrequencyHLayout.addWidget(self.siteBFrequencyTextBox)
@@ -1716,6 +1730,7 @@ class PathDesignWidget2(QWidget):
         self.siteBModulationTextBox.setFixedWidth(170)
         self.siteBModulationTextBox.setFixedHeight(30)
         self.siteBModulationTextBox.setRange(2, 4096)
+        self.siteBModulationTextBox.setValue(256)
         # Add to H stack
         self.siteBModulationHLayout.addWidget(self.siteBModulationLabel)
         self.siteBModulationHLayout.addWidget(self.siteBModulationTextBox)
@@ -1751,6 +1766,7 @@ class PathDesignWidget2(QWidget):
         self.siteBBandwidthTextBox.setFixedWidth(170)
         self.siteBBandwidthTextBox.setFixedHeight(30)
         self.siteBBandwidthTextBox.setRange(1, 100)
+        self.siteBBandwidthTextBox.setValue(30)
         # Add to H stack
         self.siteBBandwidthHLayout.addWidget(self.siteBBandwidthLabel)
         self.siteBBandwidthHLayout.addWidget(self.siteBBandwidthTextBox)
@@ -1786,6 +1802,7 @@ class PathDesignWidget2(QWidget):
         self.siteBDataRateTextBox.setFixedWidth(170)
         self.siteBDataRateTextBox.setFixedHeight(30)
         self.siteBDataRateTextBox.setRange(1, 4000)
+        self.siteBDataRateTextBox.setValue(150)
         # Add to H stack
         self.siteBDataRateHLayout.addWidget(self.siteBDataRateLabel)
         self.siteBDataRateHLayout.addWidget(self.siteBDataRateTextBox)

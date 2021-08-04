@@ -393,3 +393,10 @@ class PathDesignWidget1(QWidget):
             parent.pathDesignWidget2.siteBAntennaHeightTextBox.setValue(parent.pathDesignData.getSite2AH())
             # Change page
             parent.screenTransitionModules.moveToPathDesignPage2(parent)
+        if (self.numOfRows < 2):
+            # Change page
+            parent.screenTransitionModules.moveToPathDesignPage2(parent)
+        if (self.numOfRows > 2):
+            print("Selected too many sites. Please select only two sites from the table.")
+        else:
+            print("Unexpected behavior from user... (path desgin ui 1 page)")
