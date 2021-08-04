@@ -159,7 +159,7 @@ _For more examples, please refer to the [Documentation](https://www.spatialdatal
 
 
 <!-- TECHNICAL DOCUMENTATION -->
-## Technical
+## Technical Documentation
 
 How the Gui classes are defined.
 
