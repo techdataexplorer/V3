@@ -161,7 +161,8 @@ _For more examples, please refer to the [Documentation](https://www.spatialdatal
 <!-- TECHNICAL DOCUMENTATION -->
 ## Technical
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
+How the Gui classes are defined.
+<img src="src/img/class-structure.png" alt="Logo" width="300" height="400">
 
 
 <!-- LICENSE -->
