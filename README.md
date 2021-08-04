@@ -163,7 +163,7 @@ _For more examples, please refer to the [Documentation](https://www.spatialdatal
 
 How the Gui classes are defined.
 
-<img src="src/img/class-structure.png" alt="Logo" width="500" height="750">
+<img src="src/img/class-structure.png" alt="Logo" width="650" height="750">
 
 
 <!-- LICENSE -->
