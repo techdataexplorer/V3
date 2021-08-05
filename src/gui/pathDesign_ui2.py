@@ -66,7 +66,7 @@ class PathDesignWidget2(QWidget):
             }"""
         )
         self.homeBtn.setGeometry(0, 350, 1200/6, 50)
-        self.homeBtn.clicked.connect(lambda: self.moveToHomePage(parent))
+        self.homeBtn.clicked.connect(lambda: parent.screenTransitionModules.moveToHomePage(parent))
 
         # Network Configuration
         self.nwcfBtn = QPushButton(self)
@@ -2066,17 +2066,6 @@ class PathDesignWidget2(QWidget):
 
 
 
-    def moveToHomePage(self, parent):
-        parent.central_widget.setCurrentIndex(2)
-
-    def moveToPathDesignPage0(self, parent):
-        parent.central_widget.setCurrentIndex(3)
-
-    def moveToPathDesignPage1(self, parent):
-        parent.central_widget.setCurrentIndex(4)
-
-    def moveToPathDesignPage3(self, parent):
-        parent.central_widget.setCurrentIndex(6)
 
     def showdialog(self):
         self.dialogWgt = QDialog()
@@ -2137,7 +2126,7 @@ class PathDesignWidget2(QWidget):
     def pathCalculationCase1(self, parent):
         parent.pathCalc = PathProfileModules()
         # Get the user inputs
-        # Site A
+        # Site A (Transmitter)
         self.siteALat = float(self.siteALatTextBox.text())
         self.siteALng = float(self.siteALngTextBox.text())
         self.antennaGain = float(self.siteAAntennaGainTextBox.text())
@@ -2148,8 +2137,7 @@ class PathDesignWidget2(QWidget):
         self.txAntennaGain = float(self.siteAAntennaGainTextBox.text())
         self.siteATowerHeight = float(self.siteATHTextBox.text())
         self.siteAAntennaHeight = float(self.siteAAntennaHeightTextBox.text())
-        self.freq = float(self.siteAFrequencyTextBox.text())
-        # Site B
+        # Site B (Receiver)
         self.siteBLat = float(self.siteBLatTextBox.text())
         self.siteBLng = float(self.siteBLngTextBox.text())
         self.rxAntennaGain = float(self.siteBAntennaGainTextBox.text())
@@ -2157,7 +2145,6 @@ class PathDesignWidget2(QWidget):
         self.rxThresholdValue = float(self.siteBRXThresholdTextBox.text())
         self.siteBTowerHeight = float(self.siteBTHTextBox.text())
         self.siteBAntennaHeight = float(self.siteBAntennaHeightTextBox.text())
-
         # (1) EIRP
         self.EIRPResult = float(parent.pathCalc.EIRP(self.antennaGain, self.transmitPower, self.TXCouplingLoss, self.MiscLoss))
         parent.pathDesignWidget3.EIRPTextBox.setText(str(self.EIRPResult))
@@ -2193,33 +2180,33 @@ class PathDesignWidget2(QWidget):
     def pathCalculationCase2(self, parent):
         parent.pathCalc = PathProfileModules()
         # Get user inputs
+        # Site B (Transmitter)
+        self.siteBLat = float(self.siteBLatTextBox.text())
+        self.siteBLng = float(self.siteBLngTextBox.text())
         self.antennaGain = float(self.siteBAntennaGainTextBox.text())
         self.transmitPower = float(self.siteBTransmitPowerTextBox.text())
         self.TXCouplingLoss = float(self.siteBTXCouplingLossTextBox.text())
         self.MiscLoss = float(self.siteBMiscLossesTextBox.text())
-        self.siteBLat = float(self.siteBLatTextBox.text())
-        self.siteBLng = float(self.siteBLngTextBox.text())
-        self.siteALat = float(self.siteALatTextBox.text())
-        self.siteALng = float(self.siteALngTextBox.text())
         self.freq = float(self.siteBFrequencyTextBox.text())
         self.txAntennaGain = float(self.siteBAntennaGainTextBox.text())
+        self.siteBTowerHeight = float(self.siteBTHTextBox.text())
+        self.siteBAntennaHeight = float(self.siteBAntennaHeightTextBox.text())
+        # Site A (Receiver)
+        self.siteALat = float(self.siteALatTextBox.text())
+        self.siteALng = float(self.siteALngTextBox.text())
         self.rxAntennaGain = float(self.siteAAntennaGainTextBox.text())
         self.rxCouplingLoss = float(self.siteARXCouplingLossTextBox.text())
         self.rxThresholdValue = float(self.siteARXThresholdTextBox.text())
         self.siteATowerHeight = float(self.siteATHTextBox.text())
         self.siteAAntennaHeight = float(self.siteAAntennaHeightTextBox.text())
-        self.freq = float(self.siteBFrequencyTextBox.text())
-        self.siteBTowerHeight = float(self.siteBTHTextBox.text())
-        self.siteBAntennaHeight = float(self.siteBAntennaHeightTextBox.text())
 
         # (1) EIRP
-        self.Eparentesult = float(parent.pathCalc.EIRP(self.antennaGain, self.transmitPower, self.TXCouplingLoss, self.MiscLoss))
+        self.EIRPResult = float(parent.pathCalc.EIRP(self.antennaGain, self.transmitPower, self.TXCouplingLoss, self.MiscLoss))
         parent.pathDesignWidget3.EIRPTextBox.setText(str(self.EIRPResult))
-        # (2 - a) Path Distance miles
-        self.pathDistResultMiles = float(parent.pathCalc.pathDistanceMiles(self.siteALat, self.siteALng, self.siteBLat, self.siteBLng))
-        # (2 - b) Path Distance km
-        self.pathDistanceResultKm = float(parent.pathCalc.pathDistanceKm(self.siteBLat, self.siteBLng, self.siteALat, self.siteALng))
-        parent.pathDesignWidget3.pathDistanceTextBox.setText(str(self.pathDistResultMiles))
+        # (2) Path Distance
+        self.pathDistResultKm = float(parent.pathCalc.pathDistanceKm(self.siteBLat, self.siteBLng, self.siteALat, self.siteALng))
+        self.pathDistResultMiles = float(parent.pathCalc.pathDistanceMiles(self.siteBLat, self.siteBLng, self.siteALat, self.siteALng))
+        parent.pathDesignWidget3.pathDistanceTextBox.setText( str(round(self.pathDistResultMiles, 2)) )
         # Check if path distance is not zero. zero divide will return math error.
         if (self.pathDistResultKm != 0):
             # Azimuth
@@ -2227,10 +2214,13 @@ class PathDesignWidget2(QWidget):
             parent.pathDesignWidget3.azimuthTextBox.setText( str( round(self.azimuth, 2) ) )
             # Free Space Loss
             self.freeSpaceLossResult = float(parent.pathCalc.freeSpaceLoss(self.pathDistResultMiles, self.freq, self.txAntennaGain, self.rxAntennaGain))
+            parent.pathDesignWidget3.freeSpaceLossTextBox.setText( str( round(self.freeSpaceLossResult, 2) ) )
             # Received Signal Level
             self.receivedSignalLevelResult = float(parent.pathCalc.receivedSignalLevel(self.EIRPResult, self.rxAntennaGain, self.freeSpaceLossResult, self.rxCouplingLoss))
+            parent.pathDesignWidget3.receivedSignalLevelTextBox.setText( str( round(self.receivedSignalLevelResult, 2) ))
             # Flat Fade Margin
             self.flatFadeMarginResult = float(parent.pathCalc.flatFadeMargin(self.receivedSignalLevelResult, self.rxThresholdValue))
+            parent.pathDesignWidget3.flatFadeMarginTextBox.setText( str( round(self.flatFadeMarginResult, 2) ))
             # Cloud RF API
             # (6) Cloud RF API
             if (self.siteAAntennaHeight != 0) and (self.siteBAntennaHeight != 0):
