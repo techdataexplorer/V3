@@ -1,5 +1,6 @@
 #
-# KML3DAModules.py
+# KML3DAOld.py
+# Slow version
 # Kizer Modules API
 # Created by Che Blankenship on 07/28/2021
 #
@@ -17,6 +18,7 @@ from geopy.distance import geodesic
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+import time
 
 
 class KML3DAModules:
@@ -276,4 +278,6 @@ class KML3DAModules:
 
 # ### Test call the modules ###
 # testkml = KML3DAModules()
+# start_time = time.time()
 # testkml.generateKML('/Users/cheblankenship/Downloads/', '/Users/cheblankenship/Downloads/Paths1.CSV', "Blue", "LtGreen")
+# print("---Old: %s seconds ---" % (time.time() - start_time))

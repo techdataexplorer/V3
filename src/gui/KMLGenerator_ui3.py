@@ -22,8 +22,8 @@ from constants.pathDesignData import PathDesignData
 from constants.antennaFile import antennaData
 
 # Modules
-from modules.pathProfileModules import PathProfileModules
-from modules.KML3DAModules import KML3DAModules
+# from modules.pathProfileModules import PathProfileModules
+# from modules.KML3DAModules import KML3DAModules
 
 
 # "2. Path Calculation Page"

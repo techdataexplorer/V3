@@ -39,7 +39,7 @@ from constants.pathDesignData import PathDesignData
 from modules.pathProfileModules import PathProfileModules
 from modules.screenTransitionModules import ScreenTransitionModules
 from modules.popUpModules import PopUpModules
-from modules.KML3DAModules import KML3DAModules
+from modules.KML3DA import KML3DA
 
 
 # Script for credentials
@@ -61,7 +61,7 @@ class MainWindow(QMainWindow):
         # Pop up modules
         self.popUp = PopUpModules()
         # KML Generator modules
-        self.kmlGenerator = KML3DAModules()
+        self.kmlGenerator = KML3DA()
 
 
         ### window frame ###
