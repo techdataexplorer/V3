@@ -12,7 +12,6 @@ import requests
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-# from PyQt5.QtWebEngineWidgets import *
 
 
 # Data Model
@@ -35,6 +34,8 @@ class PathDesignWidget1(QWidget):
         self.accountUI(parent)
         self.progressUI(parent)
         self.mapTableViewUI(parent)
+
+
 
     def sideMenuUI(self, parent):
         # left wrapper
