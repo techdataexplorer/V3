@@ -3,62 +3,52 @@
 # TDX Desktop
 # Created by Che Blankenship on 06/04/2021
 #
-import sys
-import json
-import io
-import os
-import csv
-import math
-# import sip
-# import folium
-import urllib.request
-import requests
-from geopy.distance import geodesic
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-# from PyQt5.QtWebEngineWidgets import *
 
 
 
 class ScreenTransitionModules:
 
-    # Move to login page.
-    def moveToLoginPage(self, parent):
-        parent.central_widget.setCurrentIndex(0)
+    def backToHome(self, parent):
+        parent.centralWidget.setCurrentIndex(0)
+    
+    def scriptAOne(self, parent):
+        parent.centralWidget.setCurrentIndex(1)
 
-    # Move to signup page.
-    def moveToSignUpPage(self, parent):
-        parent.central_widget.setCurrentIndex(1)
+    def scriptATwo(self, parent):
+        parent.centralWidget.setCurrentIndex(2)
 
-    # Move to home page.
-    def moveToHomePage(self, parent):
-        parent.central_widget.setCurrentIndex(2)
+    def pathsAOne(self, parent):
+        parent.centralWidget.setCurrentIndex(3)
 
-    # Move to path design page 0.
-    def moveToPathDesignPage0(self, parent):
-        parent.central_widget.setCurrentIndex(3)
+    def pathsATwo(self, parent):
+        parent.centralWidget.setCurrentIndex(4)
+    
+    def gudPathAOne(self, parent):
+        parent.centralWidget.setCurrentIndex(5)
 
-    # Move to path design page 1.
-    def moveToPathDesignPage1(self, parent):
-        parent.central_widget.setCurrentIndex(4)
-
-    # Move to path design page 2.
-    def moveToPathDesignPage2(self, parent):
-        parent.central_widget.setCurrentIndex(5)
-
-    # Move to path design page 3.
-    def moveToPathDesignPage3(self, parent):
-        parent.central_widget.setCurrentIndex(6)
-
-    # Move to KML generator page 1.
-    def moveToKMLGeneratorPage1(self, parent):
-        parent.central_widget.setCurrentIndex(7)
-
-    # Move to KML generator page 2.
-    def moveToKMLGeneratorPage2(self, parent):
-        parent.central_widget.setCurrentIndex(8)
-
-    # Move to KML generator page 2.
-    def moveToKMLGeneratorPage3(self, parent):
-        parent.central_widget.setCurrentIndex(9)
+    def gudPathATwo(self, parent):
+        parent.centralWidget.setCurrentIndex(6)
+    
+    def profileAOne(self, parent):
+        parent.centralWidget.setCurrentIndex(7)
+    
+    def profileATwo(self, parent):
+        parent.centralWidget.setCurrentIndex(8)
+    
+    def kml3daOne(self, parent):
+        parent.centralWidget.setCurrentIndex(9)
+    
+    def kml3daTwo(self, parent):
+        parent.centralWidget.setCurrentIndex(10)
+    
+    def kml3daThree(self, parent):
+        parent.centralWidget.setCurrentIndex(11)
+    
+    def howFarOne(self, parent):
+        parent.centralWidget.setCurrentIndex(12)
+    
+    def howFarTwo(self, parent):
+        parent.centralWidget.setCurrentIndex(13)
