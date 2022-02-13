@@ -15,6 +15,10 @@ from PyQt5.QtWidgets import *
 from pages.components.progressUI import ProgressUI
 from pages.components.loadingUI import LoadingUI
 
+# Import module & thread for gud path
+from modules.kizerModules.step2.gudPathA import GudPath
+from threads.kizerModuleThread import KizerModuleThread
+
 
 # "1. Import / Select sites Page"
 class GudPathUI1(QWidget):
@@ -25,6 +29,8 @@ class GudPathUI1(QWidget):
         self.screenWidth = QDesktopWidget().screenGeometry(-1).width()
         self.screenHeight = QDesktopWidget().screenGeometry(-1).height()
         self.progressUI = ProgressUI(self).setUp(parent, "Gud Path", 0, True)
+        self.gudPathModule = GudPath()
+        self.thread = KizerModuleThread(self, self.gudPathModule, "Gud Path")
         self.scrollVStack = QVBoxLayout(self)
         # 1. Label, textField, button
         self.downloadComponent = {
@@ -62,13 +68,8 @@ class GudPathUI1(QWidget):
 
         self.componentsTwo = [self.lulcComponent, self.obstractionComponent, self.optimizeComponent]
 
-        #
+        # initialize UI components in specific order
         self.initUI(parent)
-
-        # loading UI
-        self.loadingUI(parent)
-        self.hideLoadingUI(parent)
-
 
 
 
@@ -78,7 +79,7 @@ class GudPathUI1(QWidget):
         # progressUI(self, parent, "Gud Path", self.screenWidth, self.screenHeight)
         self.wrapperUI(parent)
         self.configUI(parent)
-
+        self.loadingUI = LoadingUI(self, self.screenWidth, self.screenHeight)
 
 
     def wrapperUI(self, parent):
@@ -101,7 +102,7 @@ class GudPathUI1(QWidget):
         )
         label.setGeometry(self.screenWidth*0.15, self.screenHeight*0.12, 500, 30)
         label.setAlignment(Qt.AlignLeft)
-        # go to kml generator btn
+        # next page btn
         btn = QPushButton(self)
         btn.setText("Next")
         btn.setStyleSheet("""
@@ -272,86 +273,43 @@ class GudPathUI1(QWidget):
         path = str(self.fileDialogWidget.getExistingDirectory(self, "Select the data for Gud Path"))
         if path:
             textField.setText(path)
-            parent.gudPathGenerator.setFolderPath(path)
+            self.gudPathModule.setFolderPath(path)
+            parent.gudPathUI2.savedLocationTextBox.setText(textField)
         textField = str(path)
 
 
     def lulcSelected(self, parent, option):
         choice = str(option.currentText())
         if choice == "Yes":
-            parent.gudPathGenerator.setLULC("Y")
+            self.gudPathModule.setLULC("Y")
         else:
-            parent.gudPathGenerator.setLULC("N")
+            self.gudPathModule.setLULC("N")
 
 
     def obstractionSelected(self, parent, option):
         choice = str(option.currentIndex())
         if choice == 0:
-            parent.gudPathGenerator.setPathEval(1)
+            self.gudPathModule.setPathEval(1)
         else:
-            parent.gudPathGenerator.setPathEval(2)
+            self.gudPathModule.setPathEval(2)
 
     def optimizationSelected(self, parent, option):
         choice = str(option.currentIndex())
         if choice == 0:
-            parent.gudPathGenerator.setOptimizePathsOption("y")
+            self.gudPathModule.setOptimizePathsOption("y")
         else:
-            parent.gudPathGenerator.setOptimizePathsOption("n")
+            self.gudPathModule.setOptimizePathsOption("n")
 
-
-
-    # have a layer so user cannot click on other UI
-    def loadingUI(self, parent):
-        # transparent black layer #
-        self.layer = QWidget(self)
-        self.layer.setAutoFillBackground(True)
-        self.layer.setStyleSheet("""
-            background-color: rgba(1, 1, 1, 0.5);
-        """)
-        self.layer.setGeometry(0, 0, self.screenWidth, self.screenHeight)
-        # loading animation #
-        self.loadGifLabel = QLabel(self)
-        self.loadGifLabel.setGeometry(int(self.screenWidth/2)-100, int(self.screenWidth/2)-100, 200, 200)
-        # self.loadGif = QMovie("./img/loading.gif")
-        self.loadGif = QMovie(self.resource_path("loading.gif"))
-        self.loadGifLabel.setMovie(self.loadGif)
-        self.loadGif.start()
-        # cancel button #
-        self.cancelBtn = QPushButton(self)
-        self.cancelBtn.setText("Cancel")
-        self.cancelBtn.setStyleSheet("""
-            QPushButton {
-                color: white;
-                font-size: 15px;
-                text-decoration: underline;
-                background-color: rgba(0, 0, 0, 0)
-            }"""
-        )
-        self.cancelBtn.setGeometry(int(self.screenWidth/2)-75, int(self.screenHeight/2)+100, 150, 40)
-        self.cancelBtn.clicked.connect(lambda: self.cancelPathA(parent))
-
-
-    def hideLoadingUI(self, parent):
-        self.layer.hide()
-        self.loadGifLabel.hide()
-        self.cancelBtn.hide()
-
-    def showLoadingUI(self, parent):
-        self.layer.show()
-        self.loadGifLabel.show()
-        self.cancelBtn.show()
-
-    def cancelPathA(self, parent):
-        print("Cancel program")
-        parent.gudPathThread.quit()
 
 
     def moveToNextPage(self, parent):
         print("execute")
-        # self.showLoadingUI(parent)
-        # parent.gudPathThread.start()
-        # parent.gudPathThread.finished.connect(lambda: parent.screenTransitionModules.moveToPathAPage2(parent))
-        parent.screenTransition.gudPathATwo(parent)
+        self.loadingUI.showLoadingUI()
+        self.thread.start()
+        self.thread.finished.connect(lambda: parent.screenTransition.gudPathATwo(parent))
+        # parent.KizerModuleThread.start()
+        # parent.KizerModuleThread.finished.connect(lambda: parent.screenTransitionModules.moveToPathAPage2(parent))
+        # parent.screenTransition.gudPathATwo(parent)
 
 
 

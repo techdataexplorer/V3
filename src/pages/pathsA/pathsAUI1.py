@@ -12,6 +12,10 @@ from PyQt5.QtWidgets import *
 
 # Import modules for this page
 from pages.components.progressUI import ProgressUI
+from pages.components.loadingUI import LoadingUI
+
+from threads.kizerModuleThread import KizerModuleThread
+from modules.kizerModules.step2.pathsA import PathsA
 
 
 # "1. Import / Select sites Page"
@@ -22,6 +26,8 @@ class PathsAUI1(QWidget):
         self.screenWidth = QDesktopWidget().screenGeometry(-1).width()
         self.screenHeight = QDesktopWidget().screenGeometry(-1).height()
         self.progressUI = ProgressUI(self).setUp(parent, "Paths A", 1, True)
+        self.pathsAModule = PathsA()
+        self.thread = KizerModuleThread(self, self.pathsAModule, "Path A")
         self.initUI(parent)
 
 
@@ -30,8 +36,7 @@ class PathsAUI1(QWidget):
         # progressUI(self, parent, "Paths A", self.screenWidth, self.screenHeight)
         self.parametersUI(parent)
         self.configUI(parent)
-        self.loadingUI(parent)
-        self.hideLoadingUI(parent)
+        self.loadingUI = LoadingUI(self, self.screenWidth, self.screenHeight)
 
 
     def parametersUI(self, parent):
@@ -373,44 +378,44 @@ class PathsAUI1(QWidget):
 
 
     # have a layer so user cannot click on other UI
-    def loadingUI(self, parent):
-        # transparent black layer #
-        self.layer = QWidget(self)
-        self.layer.setAutoFillBackground(True)
-        self.layer.setStyleSheet("""
-            background-color: rgba(1, 1, 1, 0.5);
-        """)
-        self.layer.setGeometry(0, 0, self.screenWidth, self.screenHeight)
-        # loading animation #
-        self.loadGifLabel = QLabel(self)
-        self.loadGifLabel.setGeometry(int(self.screenWidth/2)-100, int(self.screenWidth/2)-100, 200, 200)
-        # self.loadGif = QMovie("./img/loading.gif")
-        self.loadGif = QMovie(self.resource_path("loading.gif"))
-        self.loadGifLabel.setMovie(self.loadGif)
-        self.loadGif.start()
-        # cancel button #
-        self.cancelBtn = QPushButton(self)
-        self.cancelBtn.setText("Cancel")
-        self.cancelBtn.setStyleSheet("""
-            QPushButton {
-                color: white;
-                font-size: 15px;
-                text-decoration: underline;
-                background-color: rgba(0, 0, 0, 0)
-            }"""
-        )
-        self.cancelBtn.setGeometry(int(self.screenWidth/2)-75, int(self.screenHeight/2)+100, 150, 40)
-        self.cancelBtn.clicked.connect(lambda: self.cancelPathA(parent))
+    # def loadingUI(self, parent):
+    #     # transparent black layer #
+    #     self.layer = QWidget(self)
+    #     self.layer.setAutoFillBackground(True)
+    #     self.layer.setStyleSheet("""
+    #         background-color: rgba(1, 1, 1, 0.5);
+    #     """)
+    #     self.layer.setGeometry(0, 0, self.screenWidth, self.screenHeight)
+    #     # loading animation #
+    #     self.loadGifLabel = QLabel(self)
+    #     self.loadGifLabel.setGeometry(int(self.screenWidth/2)-100, int(self.screenWidth/2)-100, 200, 200)
+    #     # self.loadGif = QMovie("./img/loading.gif")
+    #     self.loadGif = QMovie(self.resource_path("loading.gif"))
+    #     self.loadGifLabel.setMovie(self.loadGif)
+    #     self.loadGif.start()
+    #     # cancel button #
+    #     self.cancelBtn = QPushButton(self)
+    #     self.cancelBtn.setText("Cancel")
+    #     self.cancelBtn.setStyleSheet("""
+    #         QPushButton {
+    #             color: white;
+    #             font-size: 15px;
+    #             text-decoration: underline;
+    #             background-color: rgba(0, 0, 0, 0)
+    #         }"""
+    #     )
+    #     self.cancelBtn.setGeometry(int(self.screenWidth/2)-75, int(self.screenHeight/2)+100, 150, 40)
+    #     self.cancelBtn.clicked.connect(lambda: self.cancelPathA(parent))
 
-    def hideLoadingUI(self, parent):
-        self.layer.hide()
-        self.loadGifLabel.hide()
-        self.cancelBtn.hide()
+    # def hideLoadingUI(self, parent):
+    #     self.layer.hide()
+    #     self.loadGifLabel.hide()
+    #     self.cancelBtn.hide()
 
-    def showLoadingUI(self, parent):
-        self.layer.show()
-        self.loadGifLabel.show()
-        self.cancelBtn.show()
+    # def showLoadingUI(self, parent):
+    #     self.layer.show()
+    #     self.loadGifLabel.show()
+    #     self.cancelBtn.show()
 
 
     def resource_path(self, relative_path):
@@ -424,7 +429,7 @@ class PathsAUI1(QWidget):
         path = str(fileDialogWidget.getExistingDirectory(self, "Select location to save the results"))
         if path:
             self.downloadLocationTextBox.setText(path)
-            parent.pathAWidget2.savedLocationTextBox.setText(path)
+            parent.pathsAUI2.savedLocationTextBox.setText(path)
         # set the path to attribute
         # parent.kmlGenerator.downloadPath = path
 
@@ -433,26 +438,26 @@ class PathsAUI1(QWidget):
         path = str(self.fileDialogWidget.getExistingDirectory(self, "Select the data set for Paths A"))
         if path:
             self.importDataSetTextBox.setText(path)
-            parent.pathsAGenerator.FolderPath = str(path)
+            self.pathsAModule.FolderPath = str(path)
             print("Check data set path >> ", path)
-        parent.pathsAGenerator.setFolderPath(str(path))
-        # parent.pathsAGenerator.FolderPath = str(path)
+        self.pathsAModule.setFolderPath(str(path))
+        # self.pathsAModule.FolderPath = str(path)
 
 
     def lulcSelected(self, parent):
         choice = str(self.lulcOptionList.currentText())
         if choice == "Yes":
-            parent.pathsAGenerator.setLULC("Y")
-            # parent.pathsAGenerator.LandUse = "Y"
+            self.pathsAModule.setLULC("Y")
+            # self.pathsAModule.LandUse = "Y"
         else:
-            parent.pathsAGenerator.setLULC("N")
-            # parent.pathsAGenerator.LandUse = "N"
+            self.pathsAModule.setLULC("N")
+            # self.pathsAModule.LandUse = "N"
 
     def compressionSelected(self, parent):
         choice = int(self.compressionOptionList.currentIndex())
         if choice == 0:
-            parent.pathsAGenerator.setCompressionOption(1)
-            # parent.pathsAGenerator.CompChoice = 1
+            self.pathsAModule.setCompressionOption(1)
+            # self.pathsAModule.CompChoice = 1
             # hide additional option and reset
             self.maxDataPointsLabel.setVisible(False)
             self.maxDataPointsTextBox.setVisible(False)
@@ -460,8 +465,8 @@ class PathsAUI1(QWidget):
             self.distanceFractionLabel.setVisible(False)
             self.distanceFractionTextBox.setVisible(False)
         if choice == 1:
-            parent.pathsAGenerator.setCompressionOption(2)
-            # parent.pathsAGenerator.CompChoice = 2
+            self.pathsAModule.setCompressionOption(2)
+            # self.pathsAModule.CompChoice = 2
             # show additional option
             self.distanceFractionLabel.setVisible(True)
             self.distanceFractionTextBox.setVisible(True)
@@ -470,27 +475,32 @@ class PathsAUI1(QWidget):
             self.maxDataPointsTextBox.setVisible(False)
             self.maxDataPointsTextBox.setValue(1)
         if choice == 2:
-            parent.pathsAGenerator.setCompressionOption(3)
-            # parent.pathsAGenerator.CompChoice = 3
+            self.pathsAModule.setCompressionOption(3)
+            # self.pathsAModule.CompChoice = 3
             # show additional option
             self.maxDataPointsLabel.setVisible(True)
             self.maxDataPointsTextBox.setVisible(True)
             self.distanceFractionLabel.setVisible(False)
             self.distanceFractionTextBox.setVisible(False)
-        print("compression option selected >> ", str(parent.pathsAGenerator.CompChoice))
+        print("compression option selected >> ", str(self.pathsAModule.CompChoice))
 
-    def cancelPathA(self, parent):
-        print("Cancel program")
-        parent.pathsAThread.quit()
+    # def cancelPathA(self, parent):
+    #     print("Cancel program")
+    #     parent.pathsAThread.quit()
 
     def moveToNextPage(self, parent):
         print("execute")
+        self.loadingUI.showLoadingUI()
+        self.pathsAModule.setMaxDataPoints(int(float(self.maxDataPointsTextBox.text())))
+        self.pathsAModule.setDistanceFraction(int(float(self.distanceFractionTextBox.text())))
+        self.thread.start()
+        self.thread.finished.connect(lambda: parent.screenTransition.pathsATwo(parent))
         # self.showLoadingUI(parent)
         # # set the additional attribute values
-        # parent.pathsAGenerator.setMaxDataPoints(int(float(self.maxDataPointsTextBox.text())))
-        # # parent.pathsAGenerator.MaxDataPointsN = int(float(self.maxDataPointsTextBox.text()))
-        # parent.pathsAGenerator.setDistanceFraction(int(float(self.distanceFractionTextBox.text())))
-        # # parent.pathsAGenerator.DistanceFraction = int(float(self.distanceFractionTextBox.text()))
+        # self.pathsAModule.setMaxDataPoints(int(float(self.maxDataPointsTextBox.text())))
+        # # self.pathsAModule.MaxDataPointsN = int(float(self.maxDataPointsTextBox.text()))
+        # self.pathsAModule.setDistanceFraction(int(float(self.distanceFractionTextBox.text())))
+        # # self.pathsAModule.DistanceFraction = int(float(self.distanceFractionTextBox.text()))
         # parent.pathsAThread.start()
         # parent.pathsAThread.finished.connect(lambda: parent.screenTransitionModules.moveToPathAPage2(parent))
-        parent.screenTransition.pathsATwo(parent)
+        # parent.screenTransition.pathsATwo(parent)

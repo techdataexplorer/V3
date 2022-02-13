@@ -11,9 +11,11 @@ from PyQt5.QtWidgets import *
 
 
 # Import modules for this page
-from modules.screenTransitionModules import ScreenTransitionModules
 from pages.components.progressUI import ProgressUI
 from pages.components.loadingUI import LoadingUI
+
+from modules.kizerModules.step2.scriptA import ScriptA
+from threads.kizerModuleThread import KizerModuleThread
 
 
 # "1. Import / Select sites Page"
@@ -26,6 +28,8 @@ class ScriptAUI1(QWidget):
         self.screenHeight = QDesktopWidget().screenGeometry(-1).height()
         self.scrollVStack = QVBoxLayout(self)
         self.progressUI = ProgressUI(self).setUp(parent, "Script A", 3, True)
+        self.scriptAModule = ScriptA()
+        self.thread = KizerModuleThread(self, self.scriptAModule, "Script A")
         # 1. Label, textField, button
         self.importDataComponent = {
             "label": QLabel(self),
@@ -80,13 +84,7 @@ class ScriptAUI1(QWidget):
         }
 
         self.componentsTwo = [self.lulcComponent, self.terrainOptionComponent, self.retainOptionComponent]
-
-        #
         self.initUI(parent)
-
-        # loading UI
-        self.loadingUI(parent)
-        self.hideLoadingUI(parent)
 
 
 
@@ -95,6 +93,7 @@ class ScriptAUI1(QWidget):
         # progressUI(self, parent, "Script A", self.screenWidth, self.screenHeight)
         self.wrapperUI(parent)
         self.configUI(parent)
+        self.loadingUI = LoadingUI(self, self.screenWidth, self.screenHeight)
 
 
 
@@ -281,8 +280,9 @@ class ScriptAUI1(QWidget):
         path = str(folderDialogWidget.getExistingDirectory(self, "Select the data for ScriptA"))
         if path:
             textField.setText(path)
-            parent.scriptAGenerator.setFolderPath(path)
+            self.scriptAModule.setFolderPath(path)
         textField = str(path)
+        parent.scriptAUI2.savedLocationTextBox.setText(textField)
 
 
     def setTerrainDataLocation(self, parent, textField):
@@ -290,100 +290,100 @@ class ScriptAUI1(QWidget):
         path = str(folderDialogWidget.getExistingDirectory(self, "Select terrain data location"))
         if path:
             textField.setText(path)
-            parent.scriptAGenerator.setTerrainDataPath(path)
+            self.scriptAModule.setTerrainDataPath(path)
         # set the path to attribute
         textField = str(path)
 
     def lulcSelected(self, parent, option):
         choice = str(option.currentText())
         if choice == "Yes":
-            parent.scriptAGenerator.setLULC("Y")
+            self.scriptAModule.setLULC("Y")
         else:
-            parent.scriptAGenerator.setLULC("N")
+            self.scriptAModule.setLULC("N")
 
 
     def terrainOptionSelected(self, parent, option):
         choice = str(option.currentIndex())
         if choice == 0:
-            parent.scriptAGenerator.setTerrainOption(1)
+            self.scriptAModule.setTerrainOption(1)
         if choice == 1:
-            parent.scriptAGenerator.setTerrainOption(2)
+            self.scriptAModule.setTerrainOption(2)
         if choice == 2:
-            parent.scriptAGenerator.setTerrainOption(3)
+            self.scriptAModule.setTerrainOption(3)
         if choice == 3:
-            parent.scriptAGenerator.setTerrainOption(4)
+            self.scriptAModule.setTerrainOption(4)
         if choice == 4:
-            parent.scriptAGenerator.setTerrainOption(5)
+            self.scriptAModule.setTerrainOption(5)
         if choice == 5:
-            parent.scriptAGenerator.setTerrainOption(6)
+            self.scriptAModule.setTerrainOption(6)
         if choice == 6:
-            parent.scriptAGenerator.setTerrainOption(7)
+            self.scriptAModule.setTerrainOption(7)
         if choice == 7:
-            parent.scriptAGenerator.setTerrainOption(8)
+            self.scriptAModule.setTerrainOption(8)
         else:
-            parent.scriptAGenerator.setTerrainOption(1)
+            self.scriptAModule.setTerrainOption(1)
 
 
     def indexRetainSelected(self, parent, option):
         choice = str(option.currentIndex())
         if choice == 0:
-            parent.scriptAGenerator.setRetainIndex("Y")
+            self.scriptAModule.setRetainIndex("Y")
         else:
-            parent.scriptAGenerator.setRetainIndex("N")
+            self.scriptAModule.setRetainIndex("N")
 
 
 
     # have a layer so user cannot click on other UI
-    def loadingUI(self, parent):
-        # transparent black layer #
-        self.layer = QWidget(self)
-        self.layer.setAutoFillBackground(True)
-        self.layer.setStyleSheet("""
-            background-color: rgba(1, 1, 1, 0.5);
-        """)
-        self.layer.setGeometry(0, 0, self.screenWidth, self.screenHeight)
-        # loading animation #
-        self.loadGifLabel = QLabel(self)
-        self.loadGifLabel.setGeometry(int(self.screenWidth/2)-100, int(self.screenWidth/2)-100, 200, 200)
-        # self.loadGif = QMovie("./img/loading.gif")
-        self.loadGif = QMovie(self.resource_path("loading.gif"))
-        self.loadGifLabel.setMovie(self.loadGif)
-        self.loadGif.start()
-        # cancel button #
-        self.cancelBtn = QPushButton(self)
-        self.cancelBtn.setText("Cancel")
-        self.cancelBtn.setStyleSheet("""
-            QPushButton {
-                color: white;
-                font-size: 15px;
-                text-decoration: underline;
-                background-color: rgba(0, 0, 0, 0)
-            }"""
-        )
-        self.cancelBtn.setGeometry(int(self.screenWidth/2)-75, int(self.screenHeight/2)+100, 150, 40)
-        self.cancelBtn.clicked.connect(lambda: self.cancelPathA(parent))
+    # def loadingUI(self, parent):
+    #     # transparent black layer #
+    #     self.layer = QWidget(self)
+    #     self.layer.setAutoFillBackground(True)
+    #     self.layer.setStyleSheet("""
+    #         background-color: rgba(1, 1, 1, 0.5);
+    #     """)
+    #     self.layer.setGeometry(0, 0, self.screenWidth, self.screenHeight)
+    #     # loading animation #
+    #     self.loadGifLabel = QLabel(self)
+    #     self.loadGifLabel.setGeometry(int(self.screenWidth/2)-100, int(self.screenWidth/2)-100, 200, 200)
+    #     # self.loadGif = QMovie("./img/loading.gif")
+    #     self.loadGif = QMovie(self.resource_path("loading.gif"))
+    #     self.loadGifLabel.setMovie(self.loadGif)
+    #     self.loadGif.start()
+    #     # cancel button #
+    #     self.cancelBtn = QPushButton(self)
+    #     self.cancelBtn.setText("Cancel")
+    #     self.cancelBtn.setStyleSheet("""
+    #         QPushButton {
+    #             color: white;
+    #             font-size: 15px;
+    #             text-decoration: underline;
+    #             background-color: rgba(0, 0, 0, 0)
+    #         }"""
+    #     )
+    #     self.cancelBtn.setGeometry(int(self.screenWidth/2)-75, int(self.screenHeight/2)+100, 150, 40)
+    #     self.cancelBtn.clicked.connect(lambda: self.cancelPathA(parent))
 
 
-    def hideLoadingUI(self, parent):
-        self.layer.hide()
-        self.loadGifLabel.hide()
-        self.cancelBtn.hide()
+    # def hideLoadingUI(self, parent):
+    #     self.layer.hide()
+    #     self.loadGifLabel.hide()
+    #     self.cancelBtn.hide()
 
-    def showLoadingUI(self, parent):
-        self.layer.show()
-        self.loadGifLabel.show()
-        self.cancelBtn.show()
+    # def showLoadingUI(self, parent):
+    #     self.layer.show()
+    #     self.loadGifLabel.show()
+    #     self.cancelBtn.show()
 
-    def cancelPathA(self, parent):
-        print("Cancel program")
-        parent.scriptAThread.quit()
+    # def cancelPathA(self, parent):
+    #     print("Cancel program")
+    #     self.thread.quit()
 
 
     def moveToNextPage(self, parent):
         print("execute")
         # self.showLoadingUI(parent)
-        # parent.scriptAThread.start()
-        # parent.scriptAThread.finished.connect(lambda: parent.screenTransition.scriptATwo(parent))
+        self.thread.start()
+        self.thread.finished.connect(lambda: parent.screenTransition.scriptATwo(parent))
         parent.screenTransition.scriptATwo(parent)
 
 

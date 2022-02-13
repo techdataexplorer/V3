@@ -101,7 +101,7 @@ class ProgressUI(QWidget):
         # Nav bar components
         # Account
         self.navAccount.setText("Account")
-        self.navAccount.setGeometry(self.screenWidth*0.85, 10, self.screenWidth*0.09, 50)
+        self.navAccount.setGeometry(self.screenWidth*0.85, 10, self.screenWidth*0.085, 50)
         self.navAccount.setStyleSheet("""
             QPushButton {
                 color: white;
@@ -114,7 +114,7 @@ class ProgressUI(QWidget):
         
         # Home
         self.navHome.setText("Home")
-        self.navHome.setGeometry(self.screenWidth*0.76, 10, self.screenWidth*0.09, 50)
+        self.navHome.setGeometry(self.screenWidth*0.75, 10, self.screenWidth*0.085, 50)
         self.navHome.setStyleSheet("""
             QPushButton {
                 color: white;
@@ -126,7 +126,7 @@ class ProgressUI(QWidget):
 
         # Network config
         self.navNetworkConfig.setText("Network Configuration")
-        self.navNetworkConfig.setGeometry(self.screenWidth*0.62, 10, self.screenWidth*0.14, 50)
+        self.navNetworkConfig.setGeometry(self.screenWidth*0.6, 10, self.screenWidth*0.14, 50)
         self.navNetworkConfig.setStyleSheet("""
             QPushButton {
                 color: white;

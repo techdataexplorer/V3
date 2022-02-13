@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import *
 
 # Import modules for this page
 from modules.screenTransitionModules import ScreenTransitionModules
+from modules.popUpModules import PopUpModules
 from pages.components.progressUI import ProgressUI
 
 
@@ -21,6 +22,7 @@ class HomeUI(QWidget):
         self.screenWidth = QDesktopWidget().screenGeometry(-1).width()
         self.screenHeight = QDesktopWidget().screenGeometry(-1).height()
         self.progressUI = ProgressUI(self).setUp(parent, "Home", 1, False)
+        self.popUpUI = PopUpModules()
         self.scrollVStack = QVBoxLayout()
         self.screenTransition = ScreenTransitionModules()
         # step 1 cards
@@ -345,10 +347,21 @@ class HomeUI(QWidget):
     def setLambda(self, parent, componentsOne, componentsTwo, componentsThree):
         # connect lambda for componentsOne (step 1 components)
         componentsOne[0]["btn"].clicked.connect(lambda: self.screenTransition.howFarOne(parent))
+        
         # connect lambda for componentsTwo (step 2 components)
-        # componentsTwo[0]["btn"].clicked.connect(lambda: self.screenTransition.pathsAOne(parent))
+        componentsTwo[0]["btn"].clicked.connect(lambda: self.popUpUI.upCommingFunctionality())
         componentsTwo[1]["btn"].clicked.connect(lambda: self.screenTransition.scriptAOne(parent))
         componentsTwo[2]["btn"].clicked.connect(lambda: self.screenTransition.pathsAOne(parent))
         componentsTwo[3]["btn"].clicked.connect(lambda: self.screenTransition.gudPathAOne(parent))
         componentsTwo[4]["btn"].clicked.connect(lambda: self.screenTransition.profileAOne(parent))
-        componentsTwo[5]["btn"].clicked.connect(lambda: self.screenTransition.kml3daOne(parent))
+        # componentsTwo[5]["btn"].clicked.connect(lambda: self.screenTransition.kml3daOne(parent))
+        componentsTwo[5]["btn"].clicked.connect(lambda: self.popUpUI.customMsg("Under maintenance..."))
+
+        # connect lambda for componentsThree (step 3 components)
+        componentsThree[0]["btn"].clicked.connect(lambda: self.popUpUI.upCommingFunctionality())
+        componentsThree[1]["btn"].clicked.connect(lambda: self.popUpUI.upCommingFunctionality())
+        componentsThree[2]["btn"].clicked.connect(lambda: self.popUpUI.upCommingFunctionality())
+        componentsThree[3]["btn"].clicked.connect(lambda: self.popUpUI.upCommingFunctionality())
+        componentsThree[4]["btn"].clicked.connect(lambda: self.popUpUI.upCommingFunctionality())
+        componentsThree[5]["btn"].clicked.connect(lambda: self.popUpUI.upCommingFunctionality())
+

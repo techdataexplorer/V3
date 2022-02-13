@@ -13,6 +13,8 @@ from PyQt5.QtWidgets import *
 # Import modules for this page
 from pages.components.progressUI import ProgressUI
 from pages.components.loadingUI import LoadingUI
+from modules.kizerModules.step1.howFar import HowFar
+from threads.kizerModuleThread import KizerModuleThread
 
 
 # "1. Import / Select sites Page"
@@ -23,6 +25,8 @@ class HowFarUI1(QWidget):
         # class attribute UI components (variables used globally in class)
         self.screenWidth = QDesktopWidget().screenGeometry(-1).width()
         self.screenHeight = QDesktopWidget().screenGeometry(-1).height()
+        self.howFarModule = HowFar()
+        self.thread = KizerModuleThread(self, self.howFarModule, "How Far")
         self.scrollVStack = QVBoxLayout(self)
         self.progressUI = ProgressUI(self).setUp(parent, "How Far", 3, True)
         # 1. Label, textField, button
@@ -40,7 +44,7 @@ class HowFarUI1(QWidget):
             "label": QLabel(self),
             "labelText": "Input the city number: ",
             "dropDown": QComboBox(self),
-            "options": ["Yes", "No"],
+            "options": [str(i) for i in range(223)],
             "labelRatio": 0.4,
             "dropDownRatio": 0.25
         }
@@ -68,6 +72,7 @@ class HowFarUI1(QWidget):
         # progressUI(self, parent, "Script A", self.screenWidth, self.screenHeight)
         self.wrapperUI(parent)
         self.configUI(parent)
+        self.loadingUI = LoadingUI(self, self.screenWidth, self.screenHeight)
 
 
 
@@ -144,11 +149,10 @@ class HowFarUI1(QWidget):
 
 
     def setLambda(self, parent, componentsOne, componentsTwo):
-        print("set lambda for components")
         # connect lambda for componentsOne
-        # componentsOne[0]["btn"].clicked.connect(lambda: self.getDataSetLocation(parent, componentsOne[0]["textField"]))
+        componentsOne[0]["btn"].clicked.connect(lambda: self.getDataSetLocation(parent, componentsOne[0]["textField"]))
         # connect lambda for componentsTwo
-        # componentsTwo[0]["dropDown"].activated.connect(lambda: self.lulcSelected(parent, componentsTwo[0]["dropDown"]))
+        componentsTwo[0]["dropDown"].activated.connect(lambda: self.locationCodeSelected(parent, componentsTwo[0]["dropDown"]))
         # componentsTwo[1]["dropDown"].activated.connect(lambda: self.terrainOptionSelected(parent, componentsTwo[1]["dropDown"]))
 
 
@@ -253,14 +257,27 @@ class HowFarUI1(QWidget):
         path = str(folderDialogWidget.getExistingDirectory(self, "Select the data for How Far"))
         if path:
             textField.setText(path)
-            parent.scriptAGenerator.setFolderPath(path)
+            self.howFarModule.setFolderPath(path)
         textField = str(path)
+        parent.howFarUI2.savedLocationTextBox.setText(textField)
+        print("Folder path: ", path)
+
+    
+    def locationCodeSelected(self, parent, dropDown):
+        print("city code", dropDown.currentIndex())
+
+        # dropDown.setCurrentText()
+        # self.howFarModule.setCityNumber(int(dropDownData.currentText()))
 
     
 
     def moveToNextPage(self, parent):
         print("execute")
-        parent.screenTransition.howFarTwo(parent)
+        self.loadingUI.showLoadingUI()
+        self.howFarModule.setCityNumber(int(self.cityNumberComponent['dropDown'].currentIndex()))
+        self.howFarModule.setMinRoughness(self.roughnessComponent['dropDown'].currentText())
+        self.thread.start()
+        self.thread.finished.connect(lambda: parent.screenTransition.howFarTwo(parent))
 
 
 

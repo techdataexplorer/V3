@@ -4,7 +4,6 @@
 # Created by Che Blankenship on 12/17/2021
 #
 import sys
-import json
 import os
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -14,27 +13,28 @@ from PyQt5.QtWidgets import *
 
 class LoadingUI(QWidget):
 
-    def __init__(self, parent=None):
-        super(LoadingUI, self).__init__(parent)
-        self.screenWidth = QDesktopWidget().screenGeometry(-1).width()
-        self.screenHeight = QDesktopWidget().screenGeometry(-1).height()
+    def __init__(self, page, width, height):
+        # self.screenWidth = QDesktopWidget().screenGeometry(-1).width()
+        # self.screenHeight = QDesktopWidget().screenGeometry(-1).height()
         # UI class attributes
-        self.layer = QWidget(self)
-        self.loadGifLabel = QLabel(self)
-        self.cancelBtn = QPushButton(self)
-        self.initUI(parent)
+        self.layer = QWidget(page)
+        self.loadGifLabel = QLabel(page)
+        self.cancelBtn = QPushButton(page)
+        self.initUI(page, width, height)
         # self.hideLoadingUI(parent)
 
     # have a layer so user cannot click on other UI
-    def initUI(self, parent):
+    def initUI(self, page, width, height):
         # transparent black layer #
         self.layer.setAutoFillBackground(True)
         self.layer.setStyleSheet("""
             background-color: rgba(1, 1, 1, 0.5);
         """)
-        self.layer.setGeometry(0, 0, self.screenWidth, self.screenHeight)
+        self.layer.setGeometry(0, 0, width, height)
         # loading animation #
-        self.loadGifLabel.setGeometry(int(self.screenWidth/2)-100, int(self.screenWidth/2)-100, 200, 200)
+        gifWidth = width/10
+        gifHeight = height/10
+        self.loadGifLabel.setGeometry(int(width/2)-(gifWidth/2), int(height/2)-(gifWidth/2), gifWidth, gifWidth)
         gifAnimation = QMovie(self.resource_path("loading.gif"))
         self.loadGifLabel.setMovie(gifAnimation)
         gifAnimation.start()
@@ -48,26 +48,26 @@ class LoadingUI(QWidget):
                 background-color: rgba(0, 0, 0, 0)
             }"""
         )
-        self.cancelBtn.setGeometry(int(self.screenWidth/2)-75, int(self.screenHeight/2)+100, 150, 40)
-        self.cancelBtn.clicked.connect(lambda: self.cancelThread(parent))
-        self.showLoadingUI(parent)
-        self.hideLoadingUI(parent)
+        self.cancelBtn.setGeometry(int(width/2)-75, int(height/2)+100, 150, 40)
+        self.cancelBtn.clicked.connect(lambda: self.cancelThread())
+        # self.showLoadingUI(page)
+        self.hideLoadingUI()
 
 
-    def hideLoadingUI(self, parent):
+    def hideLoadingUI(self):
         self.layer.hide()
         self.loadGifLabel.hide()
         self.cancelBtn.hide()
 
 
-    def showLoadingUI(self, parent):
+    def showLoadingUI(self):
         self.layer.show()
         self.loadGifLabel.show()
         self.cancelBtn.show()
 
-    def cancelThread(self, parent):
-        self.hideLoadingUI(parent)
-        parent.parent.gudPathThread.quit()
+    def cancelThread(self, threadObject):
+        self.hideLoadingUI()
+        threadObject.quit()
 
 
     def resource_path(self, relative_path):
