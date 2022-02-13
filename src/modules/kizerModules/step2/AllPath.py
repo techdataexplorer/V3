@@ -1,3 +1,5 @@
+# Written/modified/fixed by Eric Cutherell
+# Date: Feb 12th 2022
 # Path Spider Web Creation Program
 
 import math
