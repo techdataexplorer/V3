@@ -10,7 +10,7 @@ class ProfileA(object):
 
     def __init__(self):
         self.FolderPath = ""
-        self.FeetMeters = ""
+        self.FeetMeters = "" # this input comes from ini file; hence, no setter function is declared
 
     def setFolderPath(self, folderPath):
         self.FolderPath = str(folderPath)
