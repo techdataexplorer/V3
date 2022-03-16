@@ -17,7 +17,6 @@ from PyQt5.QtWidgets import *
 class PathsA(object):
 
     def __init__(self, parent=None):
-        super(PathsA, self).__init__(parent)
         # class attributes (variables for user input)
         self.FolderPath      = ""
         self.Answers         = []
